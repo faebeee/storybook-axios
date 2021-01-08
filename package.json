@@ -7,7 +7,7 @@
     "dev": "npx tsc --watch",
     "build": "npx tsc",
     "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook -o doc"
+    "build-storybook": "build-storybook -o docs"
   },
   "author": "",
   "license": "ISC",
