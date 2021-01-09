@@ -10,7 +10,7 @@
         "build-storybook": "build-storybook -o docs"
     },
     "files": [
-        "./src/**/*",
+        "./src/**/*"
     ],
     "author": "faebeee",
     "license": "ISC",
