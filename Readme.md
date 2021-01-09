@@ -3,6 +3,8 @@ Storybook addon to inspect axios network requests.
 
 ![UI ](./doc/ui.png)
 
+## Demo
+[Check out the demo](https://faebeee.github.io/storybook-axios/index.html)
 
 ## Tech
 Created using [React](https://www.npmjs.com/package/react), [axios](https://www.npmjs.com/package/axios) and [antd](https://www.npmjs.com/package/antd)
