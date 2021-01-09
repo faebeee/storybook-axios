@@ -1,6 +1,6 @@
 {
     "name": "storybook-axios",
-    "version": "0.1.5",
+    "version": "0.1.6",
     "description": "Axios inspection for storybook",
     "keywords": [
         "storybook",
