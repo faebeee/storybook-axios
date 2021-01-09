@@ -1,8 +1,14 @@
 {
     "name": "storybook-axios",
-    "version": "0.1.4",
+    "version": "0.1.5",
     "description": "Axios inspection for storybook",
-    "keywords": ["storybook", "axios", "network", "documentation", "addon"],
+    "keywords": [
+        "storybook",
+        "axios",
+        "network",
+        "documentation",
+        "addon"
+    ],
     "main": "./register.js",
     "scripts": {
         "dev": "npx tsc --watch",
