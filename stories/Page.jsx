@@ -1,12 +1,11 @@
+import { Button } from 'antd';
 import React from 'react-dom';
 import { getAxios } from '../utils/get-axios';
 
-export const Page = () => {
+export const Page = ({ method, config }) => {
     const execRequest = () => {
-        getAxios().get( 'https://swapi.dev/api/people/?search=r2' )
-            .then( () => {
-
-            } )
+        getAxios()[method]('https://swapi.dev/api/people/?search=r2', config);
     }
-    return (<button onClick={ execRequest }>Load</button>);
+
+    return (<Button type="primary" onClick={ execRequest }>Load</Button>);
 };
