@@ -1,6 +1,6 @@
 {
     "name": "storybook-axios",
-    "version": "0.1.0",
+    "version": "0.1.1",
     "description": "",
     "main": "./register.js",
     "scripts": {
@@ -9,6 +9,10 @@
         "storybook": "start-storybook -p 6006",
         "build-storybook": "build-storybook -o docs"
     },
+    "files": [
+        "./src",
+        "register.js"
+    ],
     "author": "faebeee",
     "license": "ISC",
     "repository": {
