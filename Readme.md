@@ -37,7 +37,7 @@ module.exports = {
 add a decorator in `.storybook/preview.js` and pass in the `axios` instance which is used in your app.
 
 ```js
-import withAxiosDecorator from '../';
+import withAxiosDecorator from 'storybook-axios';
 import { getAxios } from '../utils/get-axios';
 
 export const parameters = {
