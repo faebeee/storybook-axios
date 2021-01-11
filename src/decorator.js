@@ -7,11 +7,11 @@ var decorator = function (axios) { return addons_1.makeDecorator({
     parameterName: 'axios',
     wrapper: function (storyFn, context, data) {
         var emit = addons_1.useChannel({});
-        data.parameters.interceptors.request.use(function (response) {
-            emit('axios-request', response);
-            return response;
+        axios.interceptors.request.use(function (request) {
+            emit('axios-request', request);
+            return request;
         });
-        data.parameters.interceptors.response.use(function (response) {
+        axios.interceptors.response.use(function (response) {
             emit('axios-response', response);
             return response;
         });

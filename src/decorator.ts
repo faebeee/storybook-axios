@@ -1,17 +1,18 @@
 import { makeDecorator, useChannel } from '@storybook/addons';
+import { AxiosInstance } from 'axios';
 
-export const decorator = (axios: unknown) => makeDecorator( {
+export const decorator = (axios: AxiosInstance) => makeDecorator( {
     name: 'withAxios',
     parameterName: 'axios',
     wrapper: (storyFn, context, data) => {
         const emit = useChannel( {} );
 
-        data.parameters.interceptors.request.use( (response: unknown) => {
-            emit( 'axios-request', response );
-            return response;
+        axios.interceptors.request.use( (request) => {
+            emit( 'axios-request', request );
+            return request;
         } );
 
-        data.parameters.interceptors.response.use( (response: unknown) => {
+        axios.interceptors.response.use( (response) => {
             emit( 'axios-response', response );
             return response;
         } );
