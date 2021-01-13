@@ -4,11 +4,11 @@ import { getAxios } from '../utils/get-axios';
 import { Page } from './Page';
 
 export default {
-    title: 'Example',
+    title: 'Ajax',
     component: Page,
-    parameters: {
-        axios: getAxios(),
-    },
+    argTypes: {
+        url: {defaultValue: 'https://d9ef6d5321d6e4acd1de452ad45a8d86.m.pipedream.net'}
+    }
 };
 
 export const Get = (args) => <Page method="get" config={ null } { ...args } />;

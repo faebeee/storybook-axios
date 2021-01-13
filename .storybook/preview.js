@@ -1,4 +1,4 @@
-import withAxiosDecorator from '../';
+import withAxiosDecorator from '../register';
 import { getAxios } from '../utils/get-axios';
 
 export const parameters = {

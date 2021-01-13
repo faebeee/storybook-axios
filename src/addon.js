@@ -32,35 +32,8 @@ var components_1 = require("@storybook/components");
 var core_events_1 = require("@storybook/core-events");
 var antd_1 = require("antd");
 var List_1 = require("./components/List");
-var Panel = antd_1.Collapse.Panel;
 require("antd/dist/antd.css");
 var types_1 = require("./types");
-var RequestList = function (_a) {
-    var list = _a.list;
-    // @ts-ignore
-    return (react_1.default.createElement(react_1.default.Fragment, null,
-        react_1.default.createElement(antd_1.Collapse, null, list.map(function (request, idx) {
-            var title = request.method.toUpperCase() + " " + request.url;
-            return (react_1.default.createElement(Panel, { header: title, key: idx },
-                react_1.default.createElement(antd_1.Divider, { orientation: "left", plain: true }, "Headers"),
-                JSON.stringify(request.headers),
-                react_1.default.createElement(antd_1.Divider, { orientation: "left", plain: true }, "Data"),
-                JSON.stringify(request.data)));
-        }))));
-};
-var ResponseList = function (_a) {
-    var list = _a.list;
-    // @ts-ignore
-    return (react_1.default.createElement(react_1.default.Fragment, null,
-        react_1.default.createElement(antd_1.Collapse, null, list.map(function (response, idx) {
-            var title = response.status + " " + response.config.url;
-            return (react_1.default.createElement(Panel, { header: title, key: idx },
-                react_1.default.createElement(antd_1.Divider, { orientation: "left", plain: true }, "Headers"),
-                JSON.stringify(response.headers),
-                react_1.default.createElement(antd_1.Divider, { orientation: "left", plain: true }, "Data"),
-                JSON.stringify(response.data)));
-        }))));
-};
 exports.default = (function () {
     addons_1.addons.register('faebeee/storybook-axios', function (api) {
         addons_1.addons.add('storybook-axios/panel', {
@@ -69,19 +42,19 @@ exports.default = (function () {
             render: function (_a) {
                 var active = _a.active, key = _a.key;
                 var _b = react_1.useState([]), entries = _b[0], setEntries = _b[1];
-                addons_1.addons.getChannel().addListener(core_events_1.STORY_CHANGED, function () {
-                    setEntries([]);
+                addons_1.addons.getChannel().addListener(core_events_1.STORY_CHANGED, function () { return setEntries([]); });
+                var onRequest = function (data) { return setEntries(__spreadArrays(entries, [{ type: types_1.TYPES.REQ, data: data }])); };
+                var onResponse = function (data) { return setEntries(__spreadArrays(entries, [{ type: types_1.TYPES.RES, data: data }])); };
+                react_1.useEffect(function () {
+                    addons_1.addons.getChannel().addListener('axios-request', onRequest);
+                    addons_1.addons.getChannel().addListener('axios-response', onResponse);
+                    return function () {
+                        addons_1.addons.getChannel().removeListener('axios-request', onRequest);
+                        addons_1.addons.getChannel().removeListener('axios-response', onResponse);
+                    };
                 });
-                addons_1.addons.getChannel().addListener('axios-request', function (data) {
-                    setEntries(__spreadArrays(entries, [{ type: types_1.TYPES.REQ, data: data }]));
-                });
-                addons_1.addons.getChannel().addListener('axios-response', function (data) {
-                    setEntries(__spreadArrays(entries, [{ type: types_1.TYPES.RES, data: data }]));
-                });
-                // @ts-ignore
                 return (react_1.default.createElement(components_1.AddonPanel, { active: active, key: key }, entries.length === 0 ? react_1.default.createElement(antd_1.Empty, { image: antd_1.Empty.PRESENTED_IMAGE_SIMPLE }) :
-                    (react_1.default.createElement(react_1.default.Fragment, null,
-                        react_1.default.createElement(List_1.List, { list: entries })))));
+                    (react_1.default.createElement(List_1.List, { list: entries }))));
             },
         });
     });

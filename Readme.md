@@ -1,4 +1,7 @@
 # storybook-axios
+
+![Logo](./doc/storybook-axios.png)
+
 Storybook addon to inspect axios network requests.
 
 ![UI ](./doc/ui.png)
@@ -31,7 +34,6 @@ module.exports = {
         '@whitespace/storybook-addon-html',
         'storybook-axios'
     ],
-
 ```
 
 add a decorator in `.storybook/preview.js` and pass in the `axios` instance which is used in your app.
@@ -54,3 +56,7 @@ The decorator adds interceptors to that axios instance in order to listen for ne
 
 ## Example
 ![UI ](./doc/ui.gif)
+
+## Todos
+
+[ ] Make it work with FormData
