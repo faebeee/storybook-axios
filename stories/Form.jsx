@@ -15,7 +15,7 @@ export const Form = ({ url, method }) => {
             url,
             data: formData,
         });
-    }
+    };
 
     return (<form ref={ form } action={ url } method={ method } onSubmit={ execRequest }>
         <Input value="Hello World" name="value"/>

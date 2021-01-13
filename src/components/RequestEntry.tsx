@@ -10,8 +10,24 @@ export type Props = { data: AxiosRequestConfig };
 
 export const RequestEntry = ({ data, ...rest }: Props) => {
     const title = `${ data.method.toUpperCase() } ${ data.url }`;
+
+    const getFormDataObject = (formData) => {
+        const hasFormData = data.method.toUpperCase() === 'POST';
+        if(!hasFormData){
+            return data.data;
+        }
+
+        console.log(data.data)
+        console.log(data.data instanceof FormData);
+        console.log(data.data.keys?.());
+
+        const obj = {};
+        // @todo
+        return obj;
+    };
+
     return (<Panel { ...rest } header={ title } key={ data.url } extra={ <UploadOutlined/> }>
-        <Title level={2}>Request</Title>
+        <Title level={ 2 }>Request</Title>
         <Divider orientation="left" plain>Headers</Divider>
         <pre className='pre'>
            { JSON.stringify( data.headers, null, 2 ) }
@@ -19,6 +35,7 @@ export const RequestEntry = ({ data, ...rest }: Props) => {
 
         <Divider orientation="left" plain>Data</Divider>
         <pre className='pre'>
+        { JSON.stringify( getFormDataObject(data.data), null, 2 ) }
         { JSON.stringify( data.data, null, 2 ) }
         </pre>
 
