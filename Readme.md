@@ -59,4 +59,4 @@ The decorator adds interceptors to that axios instance in order to listen for ne
 
 ## Todos
 
-[ ] Make it work with FormData
+[x] Make it work with FormData

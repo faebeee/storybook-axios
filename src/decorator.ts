@@ -1,14 +1,17 @@
 import { makeDecorator, useChannel } from '@storybook/addons';
 import { AxiosInstance } from 'axios';
 import { useEffect } from 'react';
+import serializeFormData from './utils/serialize-form-data';
 
 export const decorator = (axios: AxiosInstance) => makeDecorator( {
     name: 'withAxios',
     parameterName: 'axios',
     wrapper: (storyFn, context, data) => {
         const emit = useChannel( {} );
+
         const onReq = (request) => {
-            emit( 'axios-request', request );
+            const data = request.data instanceof FormData ? serializeFormData( request.data ) : request.data;
+            emit( 'axios-request', { ...request, data } );
             return request;
         };
 

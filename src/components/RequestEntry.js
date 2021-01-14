@@ -34,27 +34,12 @@ var icons_1 = require("@ant-design/icons");
 var RequestEntry = function (_a) {
     var data = _a.data, rest = __rest(_a, ["data"]);
     var title = data.method.toUpperCase() + " " + data.url;
-    var getFormDataObject = function (formData) {
-        var _a, _b;
-        var hasFormData = data.method.toUpperCase() === 'POST';
-        if (!hasFormData) {
-            return data.data;
-        }
-        console.log(data.data);
-        console.log(data.data instanceof FormData);
-        console.log((_b = (_a = data.data).keys) === null || _b === void 0 ? void 0 : _b.call(_a));
-        var obj = {};
-        // @todo
-        return obj;
-    };
     return (react_1.default.createElement(Panel, __assign({}, rest, { header: title, key: data.url, extra: react_1.default.createElement(icons_1.UploadOutlined, null) }),
         react_1.default.createElement(Title_1.default, { level: 2 }, "Request"),
         react_1.default.createElement(antd_1.Divider, { orientation: "left", plain: true }, "Headers"),
         react_1.default.createElement("pre", { className: 'pre' }, JSON.stringify(data.headers, null, 2)),
         react_1.default.createElement(antd_1.Divider, { orientation: "left", plain: true }, "Data"),
-        react_1.default.createElement("pre", { className: 'pre' },
-            JSON.stringify(getFormDataObject(data.data), null, 2),
-            JSON.stringify(data.data, null, 2)),
+        react_1.default.createElement("pre", { className: 'pre' }, JSON.stringify(data.data, null, 2)),
         react_1.default.createElement(antd_1.Divider, { orientation: "left", plain: true }, "Params"),
         react_1.default.createElement("pre", { className: 'pre' }, JSON.stringify(data.params, null, 2))));
 };
