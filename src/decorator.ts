@@ -1,35 +1,41 @@
 import { makeDecorator, useChannel } from '@storybook/addons';
 import { AxiosInstance } from 'axios';
-import { useEffect } from 'react';
 import serializeFormData from './utils/serialize-form-data';
 
-export const decorator = (axios: AxiosInstance) => makeDecorator( {
-    name: 'withAxios',
-    parameterName: 'axios',
-    wrapper: (storyFn, context, data) => {
-        const emit = useChannel( {} );
+export const decorator = (axios: AxiosInstance) => {
+    const interceptors = { req: null, res: null };
 
-        const onReq = (request) => {
-            const data = request.data instanceof FormData ? serializeFormData( request.data ) : request.data;
-            emit( 'axios-request', { ...request, data } );
-            return request;
-        };
+    return makeDecorator( {
+        name: 'withAxios',
+        parameterName: 'axios',
+        wrapper: (storyFn, context, data) => {
+            const emit = useChannel( {} );
 
-        const onRes = (response) => {
-            emit( 'axios-response', response );
-            return response;
-        }
-
-        useEffect( () => {
-            const reqInt = axios.interceptors.request.use( onReq );
-            const resInt = axios.interceptors.response.use( onRes );
-
-            return () => {
-                axios.interceptors.request.eject( reqInt );
-                axios.interceptors.response.eject( resInt );
+            if (interceptors.req !== null) {
+                axios.interceptors.request.eject( interceptors.req );
+                interceptors.req = null;
             }
-        } );
 
-        return storyFn( context );
-    },
-} );
+            if (interceptors.res !== null) {
+                axios.interceptors.response.eject( interceptors.res );
+                interceptors.res = null;
+            }
+
+            const onReq = (request) => {
+                const data = request.data instanceof FormData ? serializeFormData( request.data ) : request.data;
+                emit( 'axios-request', { ...request, data } );
+                return request;
+            }
+
+            const onRes = (response) => {
+                emit( 'axios-response', response );
+                return response;
+            }
+
+            interceptors.req = axios.interceptors.request.use( onReq );
+            interceptors.res = axios.interceptors.response.use( onRes );
+
+            return storyFn( context );
+        },
+    } );
+}

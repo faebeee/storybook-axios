@@ -16,31 +16,35 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.decorator = void 0;
 var addons_1 = require("@storybook/addons");
-var react_1 = require("react");
 var serialize_form_data_1 = __importDefault(require("./utils/serialize-form-data"));
-var decorator = function (axios) { return addons_1.makeDecorator({
-    name: 'withAxios',
-    parameterName: 'axios',
-    wrapper: function (storyFn, context, data) {
-        var emit = addons_1.useChannel({});
-        var onReq = function (request) {
-            var data = request.data instanceof FormData ? serialize_form_data_1.default(request.data) : request.data;
-            emit('axios-request', __assign(__assign({}, request), { data: data }));
-            return request;
-        };
-        var onRes = function (response) {
-            emit('axios-response', response);
-            return response;
-        };
-        react_1.useEffect(function () {
-            var reqInt = axios.interceptors.request.use(onReq);
-            var resInt = axios.interceptors.response.use(onRes);
-            return function () {
-                axios.interceptors.request.eject(reqInt);
-                axios.interceptors.response.eject(resInt);
+var decorator = function (axios) {
+    var interceptors = { req: null, res: null };
+    return addons_1.makeDecorator({
+        name: 'withAxios',
+        parameterName: 'axios',
+        wrapper: function (storyFn, context, data) {
+            var emit = addons_1.useChannel({});
+            if (interceptors.req !== null) {
+                axios.interceptors.request.eject(interceptors.req);
+                interceptors.req = null;
+            }
+            if (interceptors.res !== null) {
+                axios.interceptors.response.eject(interceptors.res);
+                interceptors.res = null;
+            }
+            var onReq = function (request) {
+                var data = request.data instanceof FormData ? serialize_form_data_1.default(request.data) : request.data;
+                emit('axios-request', __assign(__assign({}, request), { data: data }));
+                return request;
             };
-        });
-        return storyFn(context);
-    },
-}); };
+            var onRes = function (response) {
+                emit('axios-response', response);
+                return response;
+            };
+            interceptors.req = axios.interceptors.request.use(onReq);
+            interceptors.res = axios.interceptors.response.use(onRes);
+            return storyFn(context);
+        },
+    });
+};
 exports.decorator = decorator;
