@@ -25,20 +25,15 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.ResponseEntry = void 0;
+exports.ResponseErrorEntry = void 0;
 var react_1 = __importDefault(require("react"));
 var antd_1 = require("antd");
 var icons_1 = require("@ant-design/icons");
-var Title_1 = __importDefault(require("antd/lib/typography/Title"));
 var Panel = antd_1.Collapse.Panel;
-var ResponseEntry = function (_a) {
+var ResponseErrorEntry = function (_a) {
     var data = _a.data, rest = __rest(_a, ["data"]);
-    var title = data.status + " " + data.config.url;
-    return (react_1.default.createElement(Panel, __assign({}, rest, { header: title, key: data.config.url, extra: react_1.default.createElement(icons_1.DownloadOutlined, { style: { color: 'green' } }) }),
-        react_1.default.createElement(Title_1.default, { level: 2 }, "Response"),
-        react_1.default.createElement(antd_1.Divider, { orientation: "left", plain: true }, "Headers"),
-        react_1.default.createElement("pre", { className: 'pre' }, JSON.stringify(data.headers, null, 2)),
-        react_1.default.createElement(antd_1.Divider, { orientation: "left", plain: true }, "Data"),
-        react_1.default.createElement("pre", { className: 'pre' }, JSON.stringify(data.data, null, 2))));
+    var title = "ERR " + data.config.url;
+    return (react_1.default.createElement(Panel, __assign({}, rest, { header: title, key: data.config.url, extra: react_1.default.createElement(icons_1.DownloadOutlined, { style: { color: 'red' } }) }),
+        react_1.default.createElement("pre", { className: 'pre' }, data.message)));
 };
-exports.ResponseEntry = ResponseEntry;
+exports.ResponseErrorEntry = ResponseErrorEntry;

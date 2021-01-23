@@ -10,7 +10,7 @@ export type Props = { data: AxiosRequestConfig };
 
 export const RequestEntry = ({ data, ...rest }: Props) => {
     const title = `${ data.method.toUpperCase() } ${ data.url }`;
-    return (<Panel { ...rest } header={ title } key={ data.url } extra={ <UploadOutlined/> }>
+    return (<Panel { ...rest } header={ title } key={ data.url } extra={ <UploadOutlined style={{color: 'blue'}}/> }>
         <Title level={ 2 }>Request</Title>
         <Divider orientation="left" plain>Headers</Divider>
         <pre className='pre'>

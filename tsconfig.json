@@ -56,7 +56,8 @@
         /* Disallow inconsistently-cased references to the same file. */
     },
     "include": [
-        "./register.tsx"
+        "./register.tsx",
+        "./src/**/*",
     ],
     "exclude": []
 }

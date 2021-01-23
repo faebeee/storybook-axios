@@ -34,7 +34,7 @@ var icons_1 = require("@ant-design/icons");
 var RequestEntry = function (_a) {
     var data = _a.data, rest = __rest(_a, ["data"]);
     var title = data.method.toUpperCase() + " " + data.url;
-    return (react_1.default.createElement(Panel, __assign({}, rest, { header: title, key: data.url, extra: react_1.default.createElement(icons_1.UploadOutlined, null) }),
+    return (react_1.default.createElement(Panel, __assign({}, rest, { header: title, key: data.url, extra: react_1.default.createElement(icons_1.UploadOutlined, { style: { color: 'blue' } }) }),
         react_1.default.createElement(Title_1.default, { level: 2 }, "Request"),
         react_1.default.createElement(antd_1.Divider, { orientation: "left", plain: true }, "Headers"),
         react_1.default.createElement("pre", { className: 'pre' }, JSON.stringify(data.headers, null, 2)),

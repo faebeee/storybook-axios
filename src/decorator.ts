@@ -2,7 +2,7 @@ import { makeDecorator, useChannel } from '@storybook/addons';
 import { AxiosInstance } from 'axios';
 import serializeFormData from './utils/serialize-form-data';
 
-export const decorator = (axios: AxiosInstance) => {
+export const withStorybookAxios = (axios: AxiosInstance) => {
     const interceptors = { req: null, res: null };
 
     return makeDecorator( {
@@ -32,10 +32,20 @@ export const decorator = (axios: AxiosInstance) => {
                 return response;
             }
 
+
+            const onResFailed = (error) => {
+                if (error.isAxiosError === true) {
+                    emit( 'axios-response-error', error );
+                }
+                return Promise.reject( error );
+            }
+
             interceptors.req = axios.interceptors.request.use( onReq );
-            interceptors.res = axios.interceptors.response.use( onRes );
+            interceptors.res = axios.interceptors.response.use( onRes, onResFailed );
 
             return storyFn( context );
         },
     } );
 }
+
+export default withStorybookAxios;

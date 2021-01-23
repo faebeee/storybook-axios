@@ -10,8 +10,9 @@ export type Props = { data: AxiosResponse };
 
 export const ResponseEntry = ({ data, ...rest }: Props) => {
     const title = `${ data.status } ${ data.config.url }`;
-    return (<Panel { ...rest } header={ title } key={ data.config.url } extra={ <DownloadOutlined/> }>
-        <Title level={2}>Response</Title>
+    return (<Panel { ...rest } header={ title } key={ data.config.url }
+                   extra={ <DownloadOutlined style={ { color: 'green' } }/> }>
+        <Title level={ 2 }>Response</Title>
         <Divider orientation="left" plain>Headers</Divider>
         <pre className='pre'>
         { JSON.stringify( data.headers, null, 2 ) }

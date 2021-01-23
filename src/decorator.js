@@ -14,10 +14,10 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.decorator = void 0;
+exports.withStorybookAxios = void 0;
 var addons_1 = require("@storybook/addons");
 var serialize_form_data_1 = __importDefault(require("./utils/serialize-form-data"));
-var decorator = function (axios) {
+var withStorybookAxios = function (axios) {
     var interceptors = { req: null, res: null };
     return addons_1.makeDecorator({
         name: 'withAxios',
@@ -41,10 +41,17 @@ var decorator = function (axios) {
                 emit('axios-response', response);
                 return response;
             };
+            var onResFailed = function (error) {
+                if (error.isAxiosError === true) {
+                    emit('axios-response-error', error);
+                }
+                return Promise.reject(error);
+            };
             interceptors.req = axios.interceptors.request.use(onReq);
-            interceptors.res = axios.interceptors.response.use(onRes);
+            interceptors.res = axios.interceptors.response.use(onRes, onResFailed);
             return storyFn(context);
         },
     });
 };
-exports.decorator = decorator;
+exports.withStorybookAxios = withStorybookAxios;
+exports.default = exports.withStorybookAxios;
