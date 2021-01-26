@@ -10,7 +10,7 @@
         "addon",
         "storybook-addons"
     ],
-    "main": "./register.js",
+    "main": "./src/decorator.js",
     "scripts": {
         "dev": "npx tsc --watch",
         "build": "npx tsc && npm run build-storybook",

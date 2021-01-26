@@ -32,7 +32,7 @@ module.exports = {
         '@storybook/addon-notes/register',
         '@storybook/addon-a11y',
         '@whitespace/storybook-addon-html',
-        'storybook-axios'
+        'storybook-axios/register'
     ],
 ```
 
