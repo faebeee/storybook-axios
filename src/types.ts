@@ -11,6 +11,7 @@ export enum EVENTS {
     RESPONSE = 'axios-response',
     RESPONSE_ERROR = 'axios-response-error',
     UPDATE_COUNT = 'axios-update-count',
+    UPDATE_RESPONSE_CODE = 'axios-update-response-code',
 }
 
 export type ListEntry = {

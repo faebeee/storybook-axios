@@ -1,4 +1,4 @@
-import withAxiosDecorator from '../';
+import withAxiosDecorator from '../dist/src/decorator';
 import { getAxios } from '../utils/get-axios';
 
 export const parameters = {

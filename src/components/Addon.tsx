@@ -1,9 +1,11 @@
-import { ArrowDownOutlined, ArrowUpOutlined, DownloadOutlined, UploadOutlined } from '@ant-design/icons';
+import { DownloadOutlined, UploadOutlined } from '@ant-design/icons';
 import { addons } from '@storybook/addons';
+import { useGlobals } from '@storybook/api';
 import { AddonPanel } from '@storybook/components';
 import { STORY_CHANGED } from '@storybook/core-events';
-import { Card, Col, Empty, Row, Space, Statistic } from 'antd';
+import { Card, Col, Empty, Input, Row, Statistic } from 'antd';
 import React, { useEffect, useMemo, useState } from 'react';
+
 import { EVENTS, TYPES } from '../types';
 import { List } from './List';
 
@@ -16,7 +18,13 @@ export const Addon = ({ active }: Props) => {
     const onRequest = (data) => setEntries( [...entries, { type: TYPES.REQ, data }] );
     const onResponse = (data) => setEntries( [...entries, { type: TYPES.RES, data }] );
     const onResponseError = (data) => setEntries( [...entries, { type: TYPES.RES_ERR, data }] );
-    const onStoryChanged = () => setEntries( [] );
+
+    const onStoryChanged = () => {
+        setEntries( [] );
+        // Reset on story changes
+        addons.getChannel().emit( EVENTS.UPDATE_RESPONSE_CODE, null )
+    }
+    const [, updateGlobals] = useGlobals();
 
     const stats = useMemo( () => ({
         req: entries.filter( entry => [TYPES.REQ].includes( entry.type ) ).length,
@@ -41,35 +49,41 @@ export const Addon = ({ active }: Props) => {
         }
     }, [onRequest, onResponse, onResponseError] );
 
+    const onChangeResponseCode = (data) => {
+        addons.getChannel().emit( EVENTS.UPDATE_RESPONSE_CODE, parseInt(data.target.value) )
+    }
+
     return (<AddonPanel active={ active }>
-        { entries.length === 0 ? <Empty image={ Empty.PRESENTED_IMAGE_SIMPLE }/> :
-            (<Row gutter={ 16 }>
-                <Col span={ 4 }>
-                    <Card>
-                        <Statistic
-                            title="Requests"
-                            value={ stats.req }
-                            valueStyle={ { color: 'blue' } }
-                            prefix={ <UploadOutlined/> }/>
-                    </Card>
-                    <Card>
-                        <Statistic
-                            title="Responses"
-                            value={ stats.res }
-                            valueStyle={ { color: 'green' } }
-                            prefix={ <DownloadOutlined/> }/>
-                    </Card>
-                    <Card>
-                        <Statistic
-                            title="Errors"
-                            value={ stats.err }
-                            valueStyle={ { color: 'red' } }
-                            prefix={ <DownloadOutlined/> }/>
-                    </Card>
-                </Col>
-                <Col span={ 20 }>
-                    <List list={ entries }/>
-                </Col>
-            </Row>) }
+        <Row gutter={ 16 }>
+            <Col span={ 4 }>
+                <Card>
+                    <Input addonBefore="Status" defaultValue="200" allowClear onBlur={ onChangeResponseCode }/>
+                </Card>
+                <Card>
+                    <Statistic
+                        title="Requests"
+                        value={ stats.req }
+                        valueStyle={ { color: 'blue' } }
+                        prefix={ <UploadOutlined/> }/>
+                </Card>
+                <Card>
+                    <Statistic
+                        title="Responses"
+                        value={ stats.res }
+                        valueStyle={ { color: 'green' } }
+                        prefix={ <DownloadOutlined/> }/>
+                </Card>
+                <Card>
+                    <Statistic
+                        title="Errors"
+                        value={ stats.err }
+                        valueStyle={ { color: 'red' } }
+                        prefix={ <DownloadOutlined/> }/>
+                </Card>
+            </Col>
+            <Col span={ 20 }>
+                { entries.length === 0 ? <Empty image={ Empty.PRESENTED_IMAGE_SIMPLE }/> : (<List list={ entries }/>) }
+            </Col>
+        </Row>
     </AddonPanel>);
 }
