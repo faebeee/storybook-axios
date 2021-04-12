@@ -29,13 +29,13 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.Addon = void 0;
 var icons_1 = require("@ant-design/icons");
 var addons_1 = require("@storybook/addons");
-var api_1 = require("@storybook/api");
 var components_1 = require("@storybook/components");
 var core_events_1 = require("@storybook/core-events");
 var antd_1 = require("antd");
 var react_1 = __importStar(require("react"));
 var types_1 = require("../types");
 var List_1 = require("./List");
+var TextArea = antd_1.Input.TextArea;
 var Addon = function (_a) {
     var active = _a.active;
     var _b = react_1.useState([]), entries = _b[0], setEntries = _b[1];
@@ -45,9 +45,8 @@ var Addon = function (_a) {
     var onStoryChanged = function () {
         setEntries([]);
         // Reset on story changes
-        addons_1.addons.getChannel().emit(types_1.EVENTS.UPDATE_RESPONSE_CODE, null);
+        addons_1.addons.getChannel().emit(types_1.EVENTS.UPDATE_RESPONSE_OVERWRITE, { code: null, response: null });
     };
-    var _c = api_1.useGlobals(), updateGlobals = _c[1];
     var stats = react_1.useMemo(function () { return ({
         req: entries.filter(function (entry) { return [types_1.TYPES.REQ].includes(entry.type); }).length,
         res: entries.filter(function (entry) { return [types_1.TYPES.RES].includes(entry.type); }).length,
@@ -67,14 +66,16 @@ var Addon = function (_a) {
             addons_1.addons.getChannel().removeAllListeners(types_1.EVENTS.RESPONSE_ERROR);
         };
     }, [onRequest, onResponse, onResponseError]);
-    var onChangeResponseCode = function (data) {
-        addons_1.addons.getChannel().emit(types_1.EVENTS.UPDATE_RESPONSE_CODE, parseInt(data.target.value));
-    };
+    var onChangeResponseCode = function (prop) { return function (data) {
+        var _a;
+        return addons_1.addons.getChannel().emit(types_1.EVENTS.UPDATE_RESPONSE_OVERWRITE, (_a = {}, _a[prop] = data.target.value, _a));
+    }; };
     return (react_1.default.createElement(components_1.AddonPanel, { active: active },
         react_1.default.createElement(antd_1.Row, { gutter: 16 },
             react_1.default.createElement(antd_1.Col, { span: 4 },
                 react_1.default.createElement(antd_1.Card, null,
-                    react_1.default.createElement(antd_1.Input, { addonBefore: "Status", defaultValue: "200", allowClear: true, onBlur: onChangeResponseCode })),
+                    react_1.default.createElement(antd_1.Input, { addonBefore: "Status", defaultValue: "200", allowClear: true, onBlur: onChangeResponseCode('code') }),
+                    react_1.default.createElement(TextArea, { allowClear: true, onChange: onChangeResponseCode('response'), onBlur: onChangeResponseCode('response'), placeholder: "Overwrite response data" })),
                 react_1.default.createElement(antd_1.Card, null,
                     react_1.default.createElement(antd_1.Statistic, { title: "Requests", value: stats.req, valueStyle: { color: 'blue' }, prefix: react_1.default.createElement(icons_1.UploadOutlined, null) })),
                 react_1.default.createElement(antd_1.Card, null,

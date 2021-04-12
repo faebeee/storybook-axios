@@ -26,14 +26,16 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ResponseErrorEntry = void 0;
-var react_1 = __importDefault(require("react"));
-var antd_1 = require("antd");
 var icons_1 = require("@ant-design/icons");
+var antd_1 = require("antd");
+var react_1 = __importDefault(require("react"));
 var Panel = antd_1.Collapse.Panel;
 var ResponseErrorEntry = function (_a) {
+    var _b;
     var data = _a.data, rest = __rest(_a, ["data"]);
     var title = "ERR " + data.config.url;
     return (react_1.default.createElement(Panel, __assign({}, rest, { header: title, key: data.config.url, extra: react_1.default.createElement(icons_1.DownloadOutlined, { style: { color: 'red' } }) }),
-        react_1.default.createElement("pre", { className: 'pre' }, data.message)));
+        react_1.default.createElement("pre", { className: "pre" }, data.message),
+        react_1.default.createElement("pre", { className: "pre" }, (_b = data.response) === null || _b === void 0 ? void 0 : _b.data)));
 };
 exports.ResponseErrorEntry = ResponseErrorEntry;

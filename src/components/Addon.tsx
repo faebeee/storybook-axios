@@ -1,13 +1,13 @@
 import { DownloadOutlined, UploadOutlined } from '@ant-design/icons';
 import { addons } from '@storybook/addons';
-import { useGlobals } from '@storybook/api';
 import { AddonPanel } from '@storybook/components';
 import { STORY_CHANGED } from '@storybook/core-events';
 import { Card, Col, Empty, Input, Row, Statistic } from 'antd';
 import React, { useEffect, useMemo, useState } from 'react';
-
 import { EVENTS, TYPES } from '../types';
 import { List } from './List';
+
+const { TextArea } = Input;
 
 export type Props = {
     active: boolean;
@@ -22,9 +22,8 @@ export const Addon = ({ active }: Props) => {
     const onStoryChanged = () => {
         setEntries( [] );
         // Reset on story changes
-        addons.getChannel().emit( EVENTS.UPDATE_RESPONSE_CODE, null )
+        addons.getChannel().emit( EVENTS.UPDATE_RESPONSE_OVERWRITE, { code: null, response: null } );
     }
-    const [, updateGlobals] = useGlobals();
 
     const stats = useMemo( () => ({
         req: entries.filter( entry => [TYPES.REQ].includes( entry.type ) ).length,
@@ -49,15 +48,19 @@ export const Addon = ({ active }: Props) => {
         }
     }, [onRequest, onResponse, onResponseError] );
 
-    const onChangeResponseCode = (data) => {
-        addons.getChannel().emit( EVENTS.UPDATE_RESPONSE_CODE, parseInt(data.target.value) )
-    }
+    const onChangeResponseCode = (prop: 'code' | 'response') => (data) => addons.getChannel().emit( EVENTS.UPDATE_RESPONSE_OVERWRITE, { [prop]: data.target.value } );
 
     return (<AddonPanel active={ active }>
         <Row gutter={ 16 }>
             <Col span={ 4 }>
                 <Card>
-                    <Input addonBefore="Status" defaultValue="200" allowClear onBlur={ onChangeResponseCode }/>
+                    <Input addonBefore="Status" defaultValue="200" allowClear
+                           onBlur={ onChangeResponseCode( 'code' ) }/>
+                    <TextArea
+                        allowClear
+                        onChange={ onChangeResponseCode( 'response' ) }
+                        onBlur={ onChangeResponseCode( 'response' ) }
+                        placeholder="Overwrite response data"/>
                 </Card>
                 <Card>
                     <Statistic

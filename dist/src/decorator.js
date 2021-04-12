@@ -19,14 +19,20 @@ var addons_1 = require("@storybook/addons");
 var types_1 = require("./types");
 var serialize_form_data_1 = __importDefault(require("./utils/serialize-form-data"));
 var withStorybookAxios = function (axios) {
-    var interceptors = { req: null, res: null, responseCode: null };
+    var interceptors = { req: null, res: null, responseOverwrite: { code: null, response: null } };
     return addons_1.makeDecorator({
         name: 'withAxios',
         parameterName: 'axios',
         wrapper: function (storyFn, context, data) {
             var _a;
             var emit = addons_1.useChannel((_a = {},
-                _a[types_1.EVENTS.UPDATE_RESPONSE_CODE] = function (code) { return interceptors.responseCode = code; },
+                _a[types_1.EVENTS.UPDATE_RESPONSE_OVERWRITE] = function (settings) {
+                    // Reset
+                    !settings && (interceptors.responseOverwrite = { code: null, response: null });
+                    // update values
+                    !!(settings === null || settings === void 0 ? void 0 : settings.code) && (interceptors.responseOverwrite.code = parseInt(settings.code));
+                    !!(settings === null || settings === void 0 ? void 0 : settings.response) && (interceptors.responseOverwrite.response = settings.response);
+                },
                 _a));
             if (interceptors.req !== null) {
                 axios.interceptors.request.eject(interceptors.req);
@@ -38,27 +44,28 @@ var withStorybookAxios = function (axios) {
             }
             var onReq = function (request) {
                 var data = request.data instanceof FormData ? serialize_form_data_1.default(request.data) : request.data;
-                if (interceptors.responseCode) {
-                    request.validateStatus = function () {
-                        return interceptors.responseCode >= 200 && interceptors.responseCode < 300;
-                    };
+                if (interceptors.responseOverwrite.code) {
                 }
-                emit('axios-request', __assign(__assign({}, request), { data: data }));
+                emit(types_1.EVENTS.REQUEST, __assign(__assign({}, request), { data: data }));
                 return request;
             };
-            var onRes = function (response) {
-                if (interceptors.responseCode) {
-                    response.status = interceptors.responseCode;
+            var mutateResponse = function (response) {
+                if (interceptors.responseOverwrite.code) {
+                    response.status = interceptors.responseOverwrite.code;
                 }
-                emit('axios-response', response);
+                if (interceptors.responseOverwrite.response) {
+                    response.data = JSON.parse(interceptors.responseOverwrite.response);
+                }
+            };
+            var onRes = function (response) {
+                mutateResponse(response);
+                emit(types_1.EVENTS.RESPONSE, response);
                 return response;
             };
             var onResFailed = function (error) {
                 if (error.isAxiosError === true) {
-                    if (interceptors.responseCode) {
-                        error.response.status = interceptors.responseCode;
-                    }
-                    emit('axios-response-error', error);
+                    mutateResponse(error.response);
+                    emit(types_1.EVENTS.RESPONSE_ERROR, error);
                 }
                 return Promise.reject(error);
             };

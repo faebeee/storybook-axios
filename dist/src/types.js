@@ -13,5 +13,5 @@ var EVENTS;
     EVENTS["RESPONSE"] = "axios-response";
     EVENTS["RESPONSE_ERROR"] = "axios-response-error";
     EVENTS["UPDATE_COUNT"] = "axios-update-count";
-    EVENTS["UPDATE_RESPONSE_CODE"] = "axios-update-response-code";
+    EVENTS["UPDATE_RESPONSE_OVERWRITE"] = "axios-update-response-OVERWRITE";
 })(EVENTS = exports.EVENTS || (exports.EVENTS = {}));
