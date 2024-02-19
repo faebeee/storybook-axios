@@ -7,7 +7,6 @@ exports.IDS = void 0;
 var react_1 = __importDefault(require("react"));
 var addons_1 = require("@storybook/addons");
 var Addon_1 = require("./src/components/Addon");
-require("antd/dist/antd.css");
 var IDS;
 (function (IDS) {
     IDS["ADDON"] = "faebeee/storybook-axios";

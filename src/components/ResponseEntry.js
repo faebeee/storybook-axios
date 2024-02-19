@@ -33,7 +33,7 @@ var Title_1 = __importDefault(require("antd/lib/typography/Title"));
 var Panel = antd_1.Collapse.Panel;
 var ResponseEntry = function (_a) {
     var data = _a.data, rest = __rest(_a, ["data"]);
-    var title = data.status + " " + data.config.url;
+    var title = "".concat(data.status, " ").concat(data.config.url);
     return (react_1.default.createElement(Panel, __assign({}, rest, { header: title, key: data.config.url, extra: react_1.default.createElement(icons_1.DownloadOutlined, { style: { color: 'green' } }) }),
         react_1.default.createElement(Title_1.default, { level: 2 }, "Response"),
         react_1.default.createElement(antd_1.Divider, { orientation: "left", plain: true }, "Headers"),

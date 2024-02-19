@@ -1,7 +1,11 @@
 "use strict";
 var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
-    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
+    var desc = Object.getOwnPropertyDescriptor(m, k);
+    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+      desc = { enumerable: true, get: function() { return m[k]; } };
+    }
+    Object.defineProperty(o, k2, desc);
 }) : (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
     o[k2] = m[k];
@@ -18,12 +22,14 @@ var __importStar = (this && this.__importStar) || function (mod) {
     __setModuleDefault(result, mod);
     return result;
 };
-var __spreadArrays = (this && this.__spreadArrays) || function () {
-    for (var s = 0, i = 0, il = arguments.length; i < il; i++) s += arguments[i].length;
-    for (var r = Array(s), k = 0, i = 0; i < il; i++)
-        for (var a = arguments[i], j = 0, jl = a.length; j < jl; j++, k++)
-            r[k] = a[j];
-    return r;
+var __spreadArray = (this && this.__spreadArray) || function (to, from, pack) {
+    if (pack || arguments.length === 2) for (var i = 0, l = from.length, ar; i < l; i++) {
+        if (ar || !(i in from)) {
+            if (!ar) ar = Array.prototype.slice.call(from, 0, i);
+            ar[i] = from[i];
+        }
+    }
+    return to.concat(ar || Array.prototype.slice.call(from));
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Addon = void 0;
@@ -37,17 +43,17 @@ var types_1 = require("../types");
 var List_1 = require("./List");
 var Addon = function (_a) {
     var active = _a.active;
-    var _b = react_1.useState([]), entries = _b[0], setEntries = _b[1];
-    var onRequest = function (data) { return setEntries(__spreadArrays(entries, [{ type: types_1.TYPES.REQ, data: data }])); };
-    var onResponse = function (data) { return setEntries(__spreadArrays(entries, [{ type: types_1.TYPES.RES, data: data }])); };
-    var onResponseError = function (data) { return setEntries(__spreadArrays(entries, [{ type: types_1.TYPES.RES_ERR, data: data }])); };
+    var _b = (0, react_1.useState)([]), entries = _b[0], setEntries = _b[1];
+    var onRequest = function (data) { return setEntries(__spreadArray(__spreadArray([], entries, true), [{ type: types_1.TYPES.REQ, data: data }], false)); };
+    var onResponse = function (data) { return setEntries(__spreadArray(__spreadArray([], entries, true), [{ type: types_1.TYPES.RES, data: data }], false)); };
+    var onResponseError = function (data) { return setEntries(__spreadArray(__spreadArray([], entries, true), [{ type: types_1.TYPES.RES_ERR, data: data }], false)); };
     var onStoryChanged = function () { return setEntries([]); };
-    var stats = react_1.useMemo(function () { return ({
+    var stats = (0, react_1.useMemo)(function () { return ({
         req: entries.filter(function (entry) { return [types_1.TYPES.REQ].includes(entry.type); }).length,
         res: entries.filter(function (entry) { return [types_1.TYPES.RES].includes(entry.type); }).length,
         err: entries.filter(function (entry) { return [types_1.TYPES.RES_ERR].includes(entry.type); }).length,
     }); }, [entries]);
-    react_1.useEffect(function () {
+    (0, react_1.useEffect)(function () {
         addons_1.addons.getChannel().addListener(core_events_1.STORY_CHANGED, onStoryChanged);
         if (active) {
             addons_1.addons.getChannel().addListener(types_1.EVENTS.REQUEST, onRequest);

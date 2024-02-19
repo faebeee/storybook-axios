@@ -32,7 +32,7 @@ var icons_1 = require("@ant-design/icons");
 var Panel = antd_1.Collapse.Panel;
 var ResponseErrorEntry = function (_a) {
     var data = _a.data, rest = __rest(_a, ["data"]);
-    var title = "ERR " + data.config.url;
+    var title = "ERR ".concat(data.config.url);
     return (react_1.default.createElement(Panel, __assign({}, rest, { header: title, key: data.config.url, extra: react_1.default.createElement(icons_1.DownloadOutlined, { style: { color: 'red' } }) }),
         react_1.default.createElement("pre", { className: 'pre' }, data.message)));
 };
