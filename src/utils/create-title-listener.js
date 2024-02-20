@@ -12,6 +12,6 @@ function createTitleListener(api) {
         responseCount = entries.filter(function (entry) { return [types_1.TYPES.RES].includes(entry.type); }).length;
         errorCount = entries.filter(function (entry) { return [types_1.TYPES.RES_ERR].includes(entry.type); }).length;
     });
-    return function () { return "Axios (" + requestCount + " / " + responseCount + " / " + errorCount + ")"; };
+    return function () { return "Axios (".concat(requestCount, " / ").concat(responseCount, " / ").concat(errorCount, ")"); };
 }
 exports.createTitleListener = createTitleListener;
