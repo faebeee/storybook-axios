@@ -1,5 +1,5 @@
 import React from 'react';
-import { AxiosResponse } from 'axios';
+import type { AxiosResponse } from 'axios';
 import { Collapse, Divider } from 'antd';
 import { DownloadOutlined } from '@ant-design/icons';
 import Title from 'antd/lib/typography/Title';

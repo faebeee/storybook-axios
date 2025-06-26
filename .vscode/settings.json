@@ -1,0 +1,9 @@
+{
+    "editor.defaultFormatter": "dprint.dprint",
+    "dprint.path": "node_modules/.bin/dprint",
+    "biome.lsp.bin": "node_modules/@biomejs/cli-darwin-x64/biome",
+    "biome.configurationPath": "./biome.json",
+    "[typescriptreact]": {
+        "editor.defaultFormatter": "dprint.dprint"
+    }
+}

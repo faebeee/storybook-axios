@@ -1,5 +1,5 @@
 import React from 'react';
-import { AxiosRequestConfig } from 'axios';
+import type { AxiosRequestConfig } from 'axios';
 import { Collapse, Divider } from 'antd';
 import Title from 'antd/lib/typography/Title';
 

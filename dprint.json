@@ -1,0 +1,18 @@
+{
+  "typescript": {
+    "useTabs": false,
+    "indentWidth": 4,
+    "quoteStyle": "preferSingle",
+    "spaceAround": true
+  },
+  "includes": [
+    "src/**/*.ts",
+    "src/**/*.tsx"
+  ],
+  "excludes": [
+    "**/node_modules"
+  ],
+  "plugins": [
+    "https://plugins.dprint.dev/typescript-0.95.8.wasm"
+  ]
+}

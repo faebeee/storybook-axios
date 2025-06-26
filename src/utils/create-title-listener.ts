@@ -1,5 +1,5 @@
-import { API } from '@storybook/api';
-import { EVENTS, ListEntry, TYPES } from '../types';
+import type { API } from '@storybook/api';
+import { EVENTS, type ListEntry, TYPES } from '../types';
 
 export function createTitleListener(api: API): () => string {
     let requestCount = 0;

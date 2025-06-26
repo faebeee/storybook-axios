@@ -1,15 +1,15 @@
-import { ArrowDownOutlined, ArrowUpOutlined, DownloadOutlined, UploadOutlined } from '@ant-design/icons';
+import { DownloadOutlined, UploadOutlined } from '@ant-design/icons';
 import { addons } from '@storybook/addons';
 import { AddonPanel } from '@storybook/components';
 import { STORY_CHANGED } from '@storybook/core-events';
-import { Card, Col, Empty, Row, Space, Statistic } from 'antd';
+import { Card, Col, Empty, Row, Statistic } from 'antd';
 import React, { useEffect, useMemo, useState } from 'react';
 import { EVENTS, TYPES } from '../types';
 import { List } from './List';
 
 export type Props = {
     active: boolean;
-}
+};
 
 export const Addon = ({ active }: Props) => {
     const [entries, setEntries] = useState( [] );

@@ -1,5 +1,5 @@
 import { makeDecorator, useChannel } from '@storybook/addons';
-import { AxiosInstance } from 'axios';
+import type { AxiosInstance } from 'axios';
 import serializeFormData from './utils/serialize-form-data';
 
 export const withStorybookAxios = (axios: AxiosInstance) => {
@@ -8,7 +8,7 @@ export const withStorybookAxios = (axios: AxiosInstance) => {
     return makeDecorator( {
         name: 'withAxios',
         parameterName: 'axios',
-        wrapper: (storyFn, context, data) => {
+        wrapper: (storyFn, context) => {
             const emit = useChannel( {} );
 
             if (interceptors.req !== null) {
