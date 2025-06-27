@@ -34,7 +34,7 @@ var __spreadArray = (this && this.__spreadArray) || function (to, from, pack) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Addon = void 0;
 var icons_1 = require("@ant-design/icons");
-var addons_1 = require("@storybook/addons");
+var manager_api_1 = require("@storybook/manager-api");
 var components_1 = require("@storybook/components");
 var core_events_1 = require("@storybook/core-events");
 var antd_1 = require("antd");
@@ -54,17 +54,17 @@ var Addon = function (_a) {
         err: entries.filter(function (entry) { return [types_1.TYPES.RES_ERR].includes(entry.type); }).length,
     }); }, [entries]);
     (0, react_1.useEffect)(function () {
-        addons_1.addons.getChannel().addListener(core_events_1.STORY_CHANGED, onStoryChanged);
+        manager_api_1.addons.getChannel().addListener(core_events_1.STORY_CHANGED, onStoryChanged);
         if (active) {
-            addons_1.addons.getChannel().addListener(types_1.EVENTS.REQUEST, onRequest);
-            addons_1.addons.getChannel().addListener(types_1.EVENTS.RESPONSE, onResponse);
-            addons_1.addons.getChannel().addListener(types_1.EVENTS.RESPONSE_ERROR, onResponseError);
+            manager_api_1.addons.getChannel().addListener(types_1.EVENTS.REQUEST, onRequest);
+            manager_api_1.addons.getChannel().addListener(types_1.EVENTS.RESPONSE, onResponse);
+            manager_api_1.addons.getChannel().addListener(types_1.EVENTS.RESPONSE_ERROR, onResponseError);
         }
         return function () {
-            addons_1.addons.getChannel().removeListener(core_events_1.STORY_CHANGED, onStoryChanged);
-            addons_1.addons.getChannel().removeAllListeners(types_1.EVENTS.REQUEST);
-            addons_1.addons.getChannel().removeAllListeners(types_1.EVENTS.RESPONSE);
-            addons_1.addons.getChannel().removeAllListeners(types_1.EVENTS.RESPONSE_ERROR);
+            manager_api_1.addons.getChannel().removeListener(core_events_1.STORY_CHANGED, onStoryChanged);
+            manager_api_1.addons.getChannel().removeAllListeners(types_1.EVENTS.REQUEST);
+            manager_api_1.addons.getChannel().removeAllListeners(types_1.EVENTS.RESPONSE);
+            manager_api_1.addons.getChannel().removeAllListeners(types_1.EVENTS.RESPONSE_ERROR);
         };
     }, [onRequest, onResponse, onResponseError]);
     return (react_1.default.createElement(components_1.AddonPanel, { active: active }, entries.length === 0 ? react_1.default.createElement(antd_1.Empty, { image: antd_1.Empty.PRESENTED_IMAGE_SIMPLE }) :

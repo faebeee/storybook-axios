@@ -16,14 +16,16 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.withStorybookAxios = void 0;
 var addons_1 = require("@storybook/addons");
+var preview_api_1 = require("@storybook/preview-api");
 var serialize_form_data_1 = __importDefault(require("./utils/serialize-form-data"));
 var withStorybookAxios = function (axios) {
     var interceptors = { req: null, res: null };
-    return (0, addons_1.makeDecorator)({
+    return (0, preview_api_1.makeDecorator)({
         name: 'withAxios',
         parameterName: 'axios',
         wrapper: function (storyFn, context, data) {
             var emit = (0, addons_1.useChannel)({});
+            console.log(emit);
             if (interceptors.req !== null) {
                 axios.interceptors.request.eject(interceptors.req);
                 interceptors.req = null;
@@ -35,10 +37,12 @@ var withStorybookAxios = function (axios) {
             var onReq = function (request) {
                 var data = request.data instanceof FormData ? (0, serialize_form_data_1.default)(request.data) : request.data;
                 emit('axios-request', __assign(__assign({}, request), { data: data }));
+                console.log('onReq', request);
                 return request;
             };
             var onRes = function (response) {
                 emit('axios-response', response);
+                console.log('onRes', response);
                 return response;
             };
             var onResFailed = function (error) {

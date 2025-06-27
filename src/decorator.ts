@@ -1,4 +1,5 @@
-import { makeDecorator, useChannel } from '@storybook/addons';
+import { useChannel } from '@storybook/addons';
+import { makeDecorator } from '@storybook/preview-api';
 import type { AxiosInstance } from 'axios';
 import serializeFormData from './utils/serialize-form-data';
 
@@ -10,6 +11,7 @@ export const withStorybookAxios = (axios: AxiosInstance) => {
         parameterName: 'axios',
         wrapper: (storyFn, context) => {
             const emit = useChannel( {} );
+            console.log(emit)
 
             if (interceptors.req !== null) {
                 axios.interceptors.request.eject( interceptors.req );
@@ -24,11 +26,13 @@ export const withStorybookAxios = (axios: AxiosInstance) => {
             const onReq = (request) => {
                 const data = request.data instanceof FormData ? serializeFormData( request.data ) : request.data;
                 emit( 'axios-request', { ...request, data } );
+                console.log('onReq', request)
                 return request;
             }
 
             const onRes = (response) => {
                 emit( 'axios-response', response );
+                console.log('onRes', response)
                 return response;
             }
 

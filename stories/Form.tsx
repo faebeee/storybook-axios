@@ -12,7 +12,7 @@ export interface FormProps {
 
 export const Form = ({ url, method }: FormProps) => {
     const form = useRef<HTMLFormElement>(null);
-    console.log(method);
+    console.log(method, url);
 
     const execRequest = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();

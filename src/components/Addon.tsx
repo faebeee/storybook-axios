@@ -1,5 +1,5 @@
 import { DownloadOutlined, UploadOutlined } from '@ant-design/icons';
-import { addons } from '@storybook/addons';
+import { addons } from '@storybook/manager-api';
 import { AddonPanel } from '@storybook/components';
 import { STORY_CHANGED } from '@storybook/core-events';
 import { Card, Col, Empty, Row, Statistic } from 'antd';
