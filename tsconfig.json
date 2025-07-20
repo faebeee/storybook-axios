@@ -58,6 +58,8 @@
     "include": [
         "./register.tsx",
         "./src/**/*",
+        "./stories/**/*",
+        "utils/**/*",
     ],
     "exclude": []
 }
