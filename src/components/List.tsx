@@ -1,7 +1,7 @@
 import { Collapse } from 'antd';
-import { AxiosError, AxiosResponse } from 'axios';
+import type { AxiosError, AxiosResponse } from 'axios';
 import React from 'react';
-import { ListEntry, TYPES } from '../types';
+import { type ListEntry, TYPES } from '../types';
 import { RequestEntry } from './RequestEntry';
 import { ResponseEntry } from './ResponseEntry';
 import { ResponseErrorEntry } from './ResponseErrorEntry';

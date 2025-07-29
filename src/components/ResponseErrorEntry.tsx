@@ -1,5 +1,5 @@
 import React from 'react';
-import { AxiosError } from 'axios';
+import type { AxiosError } from 'axios';
 import { Collapse } from 'antd';
 import { DownloadOutlined } from '@ant-design/icons';
 
