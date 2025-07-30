@@ -1,4 +1,4 @@
-import { AxiosError, AxiosRequestConfig, AxiosResponse } from 'axios';
+import type { AxiosError, AxiosRequestConfig, AxiosResponse } from 'axios';
 
 export enum TYPES {
     REQ = 'request',
@@ -14,6 +14,6 @@ export enum EVENTS {
 }
 
 export type ListEntry = {
-    type: TYPES,
+    type: TYPES;
     data: AxiosResponse | AxiosRequestConfig | AxiosError;
 }
