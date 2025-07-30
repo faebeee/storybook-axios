@@ -24,6 +24,7 @@ export const Addon = ({ active }: Props) => {
         err: entries.filter( entry => [TYPES.RES_ERR].includes( entry.type ) ).length,
     }), [entries] );
 
+    // biome-ignore lint/correctness/useExhaustiveDependencies : ignoring for now
     useEffect( () => {
         addons.getChannel().addListener( STORY_CHANGED, onStoryChanged );
 
@@ -39,6 +40,7 @@ export const Addon = ({ active }: Props) => {
             addons.getChannel().removeAllListeners( EVENTS.RESPONSE );
             addons.getChannel().removeAllListeners( EVENTS.RESPONSE_ERROR );
         }
+    // biome-ignore lint/correctness/useExhaustiveDependencies : ignoring for now
     }, [onRequest, onResponse, onResponseError] );
 
     return (<AddonPanel active={ active }>
