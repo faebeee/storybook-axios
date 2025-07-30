@@ -1,16 +1,24 @@
 import { Button } from 'antd';
-import { useRef } from 'react';
-import React from 'react-dom';
+import { type FormEvent, useRef } from 'react';
+import React from 'react';
 import serializeFormData from '../src/utils/serialize-form-data';
 import { getAxios } from '../utils/get-axios';
 import { Input } from 'antd';
 
-export const Form = ({ url, method }) => {
-    const form = useRef(null);
+export interface FormProps {
+  url: string;
+  method: 'get' | 'post' | 'put' | 'delete';
+}
+
+export const Form = ({ url, method }: FormProps) => {
+    const form = useRef<HTMLFormElement>(null);
     console.log(method);
 
-    const execRequest = (e) => {
+    const execRequest = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
+        if (!form.current) {
+            return;
+        }
         const formData = new FormData(form.current)
         if (['get', 'delete'].includes(method)) {
             getAxios()[method](url, { params: serializeFormData(formData) });

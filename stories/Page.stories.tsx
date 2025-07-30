@@ -1,6 +1,5 @@
+import { ComponentMeta } from '@storybook/react';
 import React from 'react';
-import { getAxios } from '../utils/get-axios';
-
 import { Page } from './Page';
 
 export default {
@@ -9,7 +8,7 @@ export default {
     argTypes: {
         url: {defaultValue: 'https://d9ef6d5321d6e4acd1de452ad45a8d86.m.pipedream.net'}
     }
-};
+} as ComponentMeta<typeof Page>
 
 export const Get = (args) => <Page method="get" config={ null } { ...args } />;
 export const Post = (args) => <Page method="post" config={ { foo: 'bar' } } { ...args } />;

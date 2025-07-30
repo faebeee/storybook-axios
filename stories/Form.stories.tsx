@@ -1,3 +1,4 @@
+import { ComponentMeta } from '@storybook/react';
 import React from 'react';
 import { Form } from './Form';
 
@@ -8,7 +9,7 @@ export default {
     argTypes: {
         url: { defaultValue: 'https://d9ef6d5321d6e4acd1de452ad45a8d86.m.pipedream.net' },
     },
-};
+} as ComponentMeta<typeof Form>;
 
 export const Post = (args) => <Form method="post" { ...args }/>;
 export const Get = (args) => <Form method="get" { ...args }/>;
