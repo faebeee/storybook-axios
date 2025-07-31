@@ -13,6 +13,7 @@
     "main": "./src/decorator.js",
     "scripts": {
         "lint": "biome lint",
+        "format": "biome format",
         "dev": "npx tsc --watch",
         "build": "npx tsc && npm run build-storybook",
         "storybook": "start-storybook -p 6006",

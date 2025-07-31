@@ -6,8 +6,8 @@ import { getAxios } from '../utils/get-axios';
 import { Input } from 'antd';
 
 export interface FormProps {
-  url: string;
-  method: 'get' | 'post' | 'put' | 'delete';
+    url: string;
+    method: 'get' | 'post' | 'put' | 'delete';
 }
 
 export const Form = ({ url, method }: FormProps) => {
@@ -19,7 +19,7 @@ export const Form = ({ url, method }: FormProps) => {
         if (!form.current) {
             return;
         }
-        const formData = new FormData(form.current)
+        const formData = new FormData(form.current);
         if (['get', 'delete'].includes(method)) {
             getAxios()[method](url, { params: serializeFormData(formData) });
         } else {
@@ -27,8 +27,12 @@ export const Form = ({ url, method }: FormProps) => {
         }
     };
 
-    return (<form ref={ form } action={ url } method={ method } onSubmit={ execRequest }>
-        <Input value="Hello World" name="value"/>
-        <Button htmlType="submit" type="primary">Submit</Button>
-    </form>);
+    return (
+        <form ref={form} action={url} method={method} onSubmit={execRequest}>
+            <Input value="Hello World" name="value" />
+            <Button htmlType="submit" type="primary">
+                Submit
+            </Button>
+        </form>
+    );
 };
