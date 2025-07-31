@@ -7,6 +7,7 @@
         "jsx": "react",
         "outDir": "./",
         /* Redirect output structure to the directory. */
+        "removeComments": true, /* Do not emit comments to output. */
         /* Strict Type-Checking Options */
         "strict": false,
         /* Enable all strict type-checking options. */
