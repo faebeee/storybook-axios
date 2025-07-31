@@ -7,7 +7,7 @@ on:
     branches: [master]
 
 jobs:
-  lint:
+  check-pull-request:
     runs-on: ubuntu-latest
 
     steps:
@@ -24,6 +24,9 @@ jobs:
 
       - name: Run formatter
         run: npm run format
+
+      - name: Run typecheck
+        run: npm run typecheck
 
       - name: Run linter
         run: npm run lint
