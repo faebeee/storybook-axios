@@ -2,7 +2,6 @@ import type { ComponentMeta } from '@storybook/react';
 import React from 'react';
 import { Form } from './Form';
 
-
 export default {
     title: 'Form',
     component: Form,
@@ -11,7 +10,7 @@ export default {
     },
 } as ComponentMeta<typeof Form>;
 
-export const Post = (args) => <Form method="post" { ...args }/>;
-export const Get = (args) => <Form method="get" { ...args }/>;
-export const Put = (args) => <Form method="put" { ...args }/>;
-export const Delete = (args) => <Form method="delete" { ...args }/>;
+export const Post = (args) => <Form method="post" {...args} />;
+export const Get = (args) => <Form method="get" {...args} />;
+export const Put = (args) => <Form method="put" {...args} />;
+export const Delete = (args) => <Form method="delete" {...args} />;

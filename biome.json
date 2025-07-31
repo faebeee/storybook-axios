@@ -1,47 +1,47 @@
 {
-	"$schema": "https://biomejs.dev/schemas/2.1.3/schema.json",
-	"vcs": {
-		"enabled": false,
-		"clientKind": "git",
-		"useIgnoreFile": false
-	},
-	"files": {
-		"ignoreUnknown": false,
-		"includes": [
-			"src/**/*.ts",
-			"src/**/*.tsx",
-			"stories/**/*.ts",
-			"stories/**/*.tsx",
-			"utils/**/*.ts"
-		]
-	},
-	"formatter": {
-		"enabled": false,
-		"indentWidth": 4,
-		"lineWidth": 100,
-		"indentStyle": "space"
-	},
-	"linter": {
-		"enabled": true,
-		"rules": {
-			"recommended": true,
-			"style": {
-				"useImportType": "error"
-			}
-		}
-	},
-	"javascript": {
-		"jsxRuntime": "reactClassic",
-		"formatter": {
-			"quoteStyle": "single"
-		}
-	},
-	"assist": {
-		"enabled": true,
-		"actions": {
-			"source": {
-				"organizeImports": "on"
-			}
-		}
-	}
+    "$schema": "https://biomejs.dev/schemas/2.1.3/schema.json",
+    "vcs": {
+        "enabled": false,
+        "clientKind": "git",
+        "useIgnoreFile": false
+    },
+    "files": {
+        "ignoreUnknown": false,
+        "includes": [
+            "src/**/*.ts",
+            "src/**/*.tsx",
+            "stories/**/*.ts",
+            "stories/**/*.tsx",
+            "utils/**/*.ts"
+        ]
+    },
+    "formatter": {
+        "enabled": true,
+        "indentWidth": 4,
+        "lineWidth": 100,
+        "indentStyle": "space"
+    },
+    "linter": {
+        "enabled": true,
+        "rules": {
+            "recommended": true,
+            "style": {
+                "useImportType": "error"
+            }
+        }
+    },
+    "javascript": {
+        "jsxRuntime": "reactClassic",
+        "formatter": {
+            "quoteStyle": "single"
+        }
+    },
+    "assist": {
+        "enabled": true,
+        "actions": {
+            "source": {
+                "organizeImports": "on"
+            }
+        }
+    }
 }

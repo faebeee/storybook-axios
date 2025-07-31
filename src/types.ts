@@ -16,4 +16,4 @@ export enum EVENTS {
 export type ListEntry = {
     type: TYPES;
     data: AxiosResponse | AxiosRequestConfig | AxiosError;
-}
+};
