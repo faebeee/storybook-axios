@@ -20,8 +20,8 @@ var Page_1 = require("./Page");
 exports.default = {
     title: 'Ajax',
     component: Page_1.Page,
-    argTypes: {
-        url: { defaultValue: 'https://d9ef6d5321d6e4acd1de452ad45a8d86.m.pipedream.net' },
+    args: {
+        url: 'https://d9ef6d5321d6e4acd1de452ad45a8d86.m.pipedream.net',
     },
 };
 var Get = function (args) { return react_1.default.createElement(Page_1.Page, __assign({ method: "get", config: null }, args)); };

@@ -5,8 +5,8 @@ import { Page } from './Page';
 export default {
     title: 'Ajax',
     component: Page,
-    argTypes: {
-        url: { defaultValue: 'https://d9ef6d5321d6e4acd1de452ad45a8d86.m.pipedream.net' },
+    args: {
+        url: 'https://d9ef6d5321d6e4acd1de452ad45a8d86.m.pipedream.net',
     },
 } as ComponentMeta<typeof Page>;
 

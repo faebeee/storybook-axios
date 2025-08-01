@@ -20,8 +20,8 @@ var Form_1 = require("./Form");
 exports.default = {
     title: 'Form',
     component: Form_1.Form,
-    argTypes: {
-        url: { defaultValue: 'https://d9ef6d5321d6e4acd1de452ad45a8d86.m.pipedream.net' },
+    args: {
+        url: 'https://d9ef6d5321d6e4acd1de452ad45a8d86.m.pipedream.net',
     },
 };
 var Post = function (args) { return react_1.default.createElement(Form_1.Form, __assign({ method: "post" }, args)); };

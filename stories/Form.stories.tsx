@@ -5,8 +5,8 @@ import { Form } from './Form';
 export default {
     title: 'Form',
     component: Form,
-    argTypes: {
-        url: { defaultValue: 'https://d9ef6d5321d6e4acd1de452ad45a8d86.m.pipedream.net' },
+    args: {
+        url: 'https://d9ef6d5321d6e4acd1de452ad45a8d86.m.pipedream.net',
     },
 } as ComponentMeta<typeof Form>;
 
