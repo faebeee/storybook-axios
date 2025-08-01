@@ -1,23 +1,15 @@
 import React from 'react';
 import type { AxiosResponse } from 'axios';
-import { Collapse, Divider } from 'antd';
-import { DownloadOutlined } from '@ant-design/icons';
+import { Divider } from 'antd';
 import Title from 'antd/lib/typography/Title';
-
-const { Panel } = Collapse;
 
 export type Props = { data: AxiosResponse };
 
-export const ResponseEntry = ({ data, ...rest }: Props) => {
-    const title = `${data.status} ${data.config.url}`;
+export const ResponseEntry = ({ data }: Props) => {
     return (
-        <Panel
-            {...rest}
-            header={title}
-            key={data.config.url}
-            extra={<DownloadOutlined style={{ color: 'green' }} />}
-        >
+        <>
             <Title level={2}>Response</Title>
+
             <Divider orientation="left" plain>
                 Headers
             </Divider>
@@ -27,6 +19,6 @@ export const ResponseEntry = ({ data, ...rest }: Props) => {
                 Data
             </Divider>
             <pre className="pre">{JSON.stringify(data.data, null, 2)}</pre>
-        </Panel>
+        </>
     );
 };

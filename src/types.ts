@@ -13,7 +13,7 @@ export enum EVENTS {
     UPDATE_COUNT = 'axios-update-count',
 }
 
-export type ListEntry = {
-    type: TYPES;
-    data: AxiosResponse | AxiosRequestConfig | AxiosError;
-};
+export type ListEntry =
+    | { type: TYPES.RES_ERR; data: AxiosError }
+    | { type: TYPES.REQ; data: AxiosRequestConfig }
+    | { type: TYPES.RES; data: AxiosResponse };

@@ -21,8 +21,8 @@ exports.default = {
     title: 'Ajax',
     component: Page_1.Page,
     argTypes: {
-        url: { defaultValue: 'https://d9ef6d5321d6e4acd1de452ad45a8d86.m.pipedream.net' }
-    }
+        url: { defaultValue: 'https://d9ef6d5321d6e4acd1de452ad45a8d86.m.pipedream.net' },
+    },
 };
 var Get = function (args) { return react_1.default.createElement(Page_1.Page, __assign({ method: "get", config: null }, args)); };
 exports.Get = Get;
@@ -32,5 +32,5 @@ var Put = function (args) { return react_1.default.createElement(Page_1.Page, __
 exports.Put = Put;
 var Patch = function (args) { return react_1.default.createElement(Page_1.Page, __assign({ method: "patch", config: { foo: 'bar' } }, args)); };
 exports.Patch = Patch;
-var Delete = function (args) { return react_1.default.createElement(Page_1.Page, __assign({ method: "delete", config: { params: { foo: 'bar' } } }, args)); };
+var Delete = function (args) { return (react_1.default.createElement(Page_1.Page, __assign({ method: "delete", config: { params: { foo: 'bar' } } }, args))); };
 exports.Delete = Delete;

@@ -1,23 +1,15 @@
 import React from 'react';
 import type { AxiosRequestConfig } from 'axios';
-import { Collapse, Divider } from 'antd';
+import { Divider } from 'antd';
 import Title from 'antd/lib/typography/Title';
-
-const { Panel } = Collapse;
-import { UploadOutlined } from '@ant-design/icons';
 
 export type Props = { data: AxiosRequestConfig };
 
-export const RequestEntry = ({ data, ...rest }: Props) => {
-    const title = `${data.method.toUpperCase()} ${data.url}`;
+export const RequestEntry = ({ data }: Props) => {
     return (
-        <Panel
-            {...rest}
-            header={title}
-            key={data.url}
-            extra={<UploadOutlined style={{ color: 'blue' }} />}
-        >
+        <>
             <Title level={2}>Request</Title>
+
             <Divider orientation="left" plain>
                 Headers
             </Divider>
@@ -32,6 +24,6 @@ export const RequestEntry = ({ data, ...rest }: Props) => {
                 Params
             </Divider>
             <pre className="pre">{JSON.stringify(data.params, null, 2)}</pre>
-        </Panel>
+        </>
     );
 };

@@ -67,16 +67,15 @@ var Addon = function (_a) {
             addons_1.addons.getChannel().removeAllListeners(types_1.EVENTS.RESPONSE_ERROR);
         };
     }, [onRequest, onResponse, onResponseError]);
-    return (react_1.default.createElement(components_1.AddonPanel, { active: active }, entries.length === 0 ? react_1.default.createElement(antd_1.Empty, { image: antd_1.Empty.PRESENTED_IMAGE_SIMPLE }) :
-        (react_1.default.createElement(antd_1.Row, { gutter: 16 },
-            react_1.default.createElement(antd_1.Col, { span: 4 },
-                react_1.default.createElement(antd_1.Card, null,
-                    react_1.default.createElement(antd_1.Statistic, { title: "Requests", value: stats.req, valueStyle: { color: 'blue' }, prefix: react_1.default.createElement(icons_1.UploadOutlined, null) })),
-                react_1.default.createElement(antd_1.Card, null,
-                    react_1.default.createElement(antd_1.Statistic, { title: "Responses", value: stats.res, valueStyle: { color: 'green' }, prefix: react_1.default.createElement(icons_1.DownloadOutlined, null) })),
-                react_1.default.createElement(antd_1.Card, null,
-                    react_1.default.createElement(antd_1.Statistic, { title: "Errors", value: stats.err, valueStyle: { color: 'red' }, prefix: react_1.default.createElement(icons_1.DownloadOutlined, null) }))),
-            react_1.default.createElement(antd_1.Col, { span: 20 },
-                react_1.default.createElement(List_1.List, { list: entries }))))));
+    return (react_1.default.createElement(components_1.AddonPanel, { active: active }, entries.length === 0 ? (react_1.default.createElement(antd_1.Empty, { image: antd_1.Empty.PRESENTED_IMAGE_SIMPLE })) : (react_1.default.createElement(antd_1.Row, { gutter: 16 },
+        react_1.default.createElement(antd_1.Col, { span: 4 },
+            react_1.default.createElement(antd_1.Card, null,
+                react_1.default.createElement(antd_1.Statistic, { title: "Requests", value: stats.req, valueStyle: { color: 'blue' }, prefix: react_1.default.createElement(icons_1.UploadOutlined, null) })),
+            react_1.default.createElement(antd_1.Card, null,
+                react_1.default.createElement(antd_1.Statistic, { title: "Responses", value: stats.res, valueStyle: { color: 'green' }, prefix: react_1.default.createElement(icons_1.DownloadOutlined, null) })),
+            react_1.default.createElement(antd_1.Card, null,
+                react_1.default.createElement(antd_1.Statistic, { title: "Errors", value: stats.err, valueStyle: { color: 'red' }, prefix: react_1.default.createElement(icons_1.DownloadOutlined, null) }))),
+        react_1.default.createElement(antd_1.Col, { span: 20 },
+            react_1.default.createElement(List_1.List, { list: entries }))))));
 };
 exports.Addon = Addon;
