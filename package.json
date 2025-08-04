@@ -17,6 +17,7 @@
         "dev": "npx tsc --watch",
         "build": "npx tsc && npm run build-storybook",
         "storybook": "start-storybook -p 6006",
+        "typecheck": "tsc --noEmit",
         "build-storybook": "build-storybook -o docs"
     },
     "author": "faebeee",
