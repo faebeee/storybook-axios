@@ -22,7 +22,7 @@ var withStorybookAxios = function (axios) {
     return (0, addons_1.makeDecorator)({
         name: 'withAxios',
         parameterName: 'axios',
-        wrapper: function (storyFn, context, data) {
+        wrapper: function (storyFn, context) {
             var emit = (0, addons_1.useChannel)({});
             if (interceptors.req !== null) {
                 axios.interceptors.request.eject(interceptors.req);
@@ -33,7 +33,9 @@ var withStorybookAxios = function (axios) {
                 interceptors.res = null;
             }
             var onReq = function (request) {
-                var data = request.data instanceof FormData ? (0, serialize_form_data_1.default)(request.data) : request.data;
+                var data = request.data instanceof FormData
+                    ? (0, serialize_form_data_1.default)(request.data)
+                    : request.data;
                 emit('axios-request', __assign(__assign({}, request), { data: data }));
                 return request;
             };
