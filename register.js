@@ -12,9 +12,9 @@ var IDS;
     IDS["ADDON"] = "faebeee/storybook-axios";
     IDS["PANEL"] = "storybook-axios/panel";
 })(IDS = exports.IDS || (exports.IDS = {}));
-addons_1.addons.register(IDS.ADDON, function (api) {
+addons_1.addons.register(IDS.ADDON, function () {
     addons_1.addons.add(IDS.PANEL, {
-        title: "Axios",
+        title: 'Axios',
         type: addons_1.types.PANEL,
         render: function (_a) {
             var active = _a.active, key = _a.key;

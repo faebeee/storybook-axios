@@ -7,12 +7,12 @@ export enum IDS {
     PANEL = 'storybook-axios/panel',
 }
 
-addons.register( IDS.ADDON, (api) => {
-    addons.add( IDS.PANEL, {
-        title: `Axios`,
+addons.register(IDS.ADDON, () => {
+    addons.add(IDS.PANEL, {
+        title: 'Axios',
         type: types.PANEL,
         render: ({ active, key }) => {
-            return (<Addon active={ active } key={ key }/>);
+            return <Addon active={active} key={key} />;
         },
-    } );
-} );
+    });
+});
