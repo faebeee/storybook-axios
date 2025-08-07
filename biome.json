@@ -12,6 +12,7 @@
             "src/**/*.tsx",
             "stories/**/*.ts",
             "stories/**/*.tsx",
+            "./register.tsx",
             "utils/**/*.ts"
         ]
     },
@@ -25,8 +26,14 @@
         "enabled": true,
         "rules": {
             "recommended": true,
+            "correctness": {
+                "noUnusedVariables": "error",
+                "noUnusedImports": "error",
+                "noUnusedFunctionParameters": "error"
+            },
             "style": {
-                "useImportType": "error"
+                "useImportType": "error",
+                "noUnusedTemplateLiteral": "error"
             }
         }
     },
