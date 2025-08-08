@@ -1,4 +1,4 @@
-import type { API } from '@storybook/api';
+import type { API } from '@storybook/manager-api';
 import { EVENTS, type ListEntry, TYPES } from '../types';
 
 export function createTitleListener(api: API): () => string {

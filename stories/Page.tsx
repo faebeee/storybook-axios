@@ -5,7 +5,7 @@ import { getAxios } from '../utils/get-axios';
 
 export interface PageProps {
     url: string;
-    method: 'get' | 'post' | 'put' | 'delete';
+    method: 'get' | 'post' | 'put' | 'delete' | 'patch';
     config?: AxiosRequestConfig;
 }
 

@@ -1,5 +1,4 @@
-import React from 'react';
-import { addons, types } from '@storybook/addons';
+import { addons, types } from '@storybook/manager-api';
 import { Addon } from './src/components/Addon';
 
 export enum IDS {
@@ -11,8 +10,6 @@ addons.register(IDS.ADDON, () => {
     addons.add(IDS.PANEL, {
         title: 'Axios',
         type: types.PANEL,
-        render: ({ active, key }) => {
-            return <Addon active={active} key={key} />;
-        },
+        render: Addon,
     });
 });

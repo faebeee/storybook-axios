@@ -1,8 +1,12 @@
 import withAxiosDecorator from '../';
 import { getAxios } from '../utils/get-axios';
 
-export const parameters = {
-    actions: { argTypesRegex: "^on[A-Z].*" },
-}
+/** @type { import('@storybook/react').Preview } */
+const preview = {
+    parameters: {
+        actions: { argTypesRegex: '^on[A-Z].*' },
+    },
+    decorators: [withAxiosDecorator(getAxios())],
+};
 
-export const decorators = [withAxiosDecorator(getAxios())];
+export default preview;

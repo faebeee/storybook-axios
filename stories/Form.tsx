@@ -29,7 +29,7 @@ export const Form = ({ url, method }: FormProps) => {
 
     return (
         <form ref={form} action={url} method={method} onSubmit={execRequest}>
-            <Input value="Hello World" name="value" />
+            <Input defaultValue="Hello World" name="value" />
             <Button htmlType="submit" type="primary">
                 Submit
             </Button>

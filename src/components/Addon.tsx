@@ -1,5 +1,5 @@
 import { DownloadOutlined, UploadOutlined } from '@ant-design/icons';
-import { addons } from '@storybook/addons';
+import { addons } from '@storybook/manager-api';
 import { AddonPanel } from '@storybook/components';
 import { STORY_CHANGED } from '@storybook/core-events';
 import { Card, Col, Empty, Row, Statistic } from 'antd';
@@ -7,11 +7,11 @@ import React, { useEffect, useMemo, useState } from 'react';
 import { EVENTS, TYPES } from '../types';
 import { List } from './List';
 
-export type Props = {
+export type AddonProps = {
     active: boolean;
 };
 
-export const Addon = ({ active }: Props) => {
+export const Addon = ({ active }: AddonProps) => {
     const [entries, setEntries] = useState([]);
     const onRequest = (data) => setEntries([...entries, { type: TYPES.REQ, data }]);
     const onResponse = (data) => setEntries([...entries, { type: TYPES.RES, data }]);
