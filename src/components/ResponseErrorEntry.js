@@ -4,9 +4,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ResponseErrorEntry = void 0;
-var react_1 = __importDefault(require("react"));
-var ResponseErrorEntry = function (_a) {
-    var data = _a.data;
+const react_1 = __importDefault(require("react"));
+const ResponseErrorEntry = ({ data }) => {
     return react_1.default.createElement("pre", { className: "pre" }, data.message);
 };
 exports.ResponseErrorEntry = ResponseErrorEntry;

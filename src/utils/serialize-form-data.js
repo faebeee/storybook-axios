@@ -1,8 +1,8 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 function serializeFormData(formData) {
-    var obj = {};
-    formData.forEach(function (val, key) {
+    const obj = {};
+    formData.forEach((val, key) => {
         obj[key] = val;
     });
     return obj;

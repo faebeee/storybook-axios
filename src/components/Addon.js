@@ -22,45 +22,35 @@ var __importStar = (this && this.__importStar) || function (mod) {
     __setModuleDefault(result, mod);
     return result;
 };
-var __spreadArray = (this && this.__spreadArray) || function (to, from, pack) {
-    if (pack || arguments.length === 2) for (var i = 0, l = from.length, ar; i < l; i++) {
-        if (ar || !(i in from)) {
-            if (!ar) ar = Array.prototype.slice.call(from, 0, i);
-            ar[i] = from[i];
-        }
-    }
-    return to.concat(ar || Array.prototype.slice.call(from));
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Addon = void 0;
-var icons_1 = require("@ant-design/icons");
-var addons_1 = require("@storybook/addons");
-var components_1 = require("@storybook/components");
-var core_events_1 = require("@storybook/core-events");
-var antd_1 = require("antd");
-var react_1 = __importStar(require("react"));
-var types_1 = require("../types");
-var List_1 = require("./List");
-var Addon = function (_a) {
-    var active = _a.active;
-    var _b = (0, react_1.useState)([]), entries = _b[0], setEntries = _b[1];
-    var onRequest = function (data) { return setEntries(__spreadArray(__spreadArray([], entries, true), [{ type: types_1.TYPES.REQ, data: data }], false)); };
-    var onResponse = function (data) { return setEntries(__spreadArray(__spreadArray([], entries, true), [{ type: types_1.TYPES.RES, data: data }], false)); };
-    var onResponseError = function (data) { return setEntries(__spreadArray(__spreadArray([], entries, true), [{ type: types_1.TYPES.RES_ERR, data: data }], false)); };
-    var onStoryChanged = function () { return setEntries([]); };
-    var stats = (0, react_1.useMemo)(function () { return ({
-        req: entries.filter(function (entry) { return [types_1.TYPES.REQ].includes(entry.type); }).length,
-        res: entries.filter(function (entry) { return [types_1.TYPES.RES].includes(entry.type); }).length,
-        err: entries.filter(function (entry) { return [types_1.TYPES.RES_ERR].includes(entry.type); }).length,
-    }); }, [entries]);
-    (0, react_1.useEffect)(function () {
+const icons_1 = require("@ant-design/icons");
+const addons_1 = require("@storybook/addons");
+const components_1 = require("@storybook/components");
+const core_events_1 = require("@storybook/core-events");
+const antd_1 = require("antd");
+const react_1 = __importStar(require("react"));
+const types_1 = require("../types");
+const List_1 = require("./List");
+const Addon = ({ active }) => {
+    const [entries, setEntries] = (0, react_1.useState)([]);
+    const onRequest = (data) => setEntries([...entries, { type: types_1.TYPES.REQ, data }]);
+    const onResponse = (data) => setEntries([...entries, { type: types_1.TYPES.RES, data }]);
+    const onResponseError = (data) => setEntries([...entries, { type: types_1.TYPES.RES_ERR, data }]);
+    const onStoryChanged = () => setEntries([]);
+    const stats = (0, react_1.useMemo)(() => ({
+        req: entries.filter((entry) => [types_1.TYPES.REQ].includes(entry.type)).length,
+        res: entries.filter((entry) => [types_1.TYPES.RES].includes(entry.type)).length,
+        err: entries.filter((entry) => [types_1.TYPES.RES_ERR].includes(entry.type)).length,
+    }), [entries]);
+    (0, react_1.useEffect)(() => {
         addons_1.addons.getChannel().addListener(core_events_1.STORY_CHANGED, onStoryChanged);
         if (active) {
             addons_1.addons.getChannel().addListener(types_1.EVENTS.REQUEST, onRequest);
             addons_1.addons.getChannel().addListener(types_1.EVENTS.RESPONSE, onResponse);
             addons_1.addons.getChannel().addListener(types_1.EVENTS.RESPONSE_ERROR, onResponseError);
         }
-        return function () {
+        return () => {
             addons_1.addons.getChannel().removeListener(core_events_1.STORY_CHANGED, onStoryChanged);
             addons_1.addons.getChannel().removeAllListeners(types_1.EVENTS.REQUEST);
             addons_1.addons.getChannel().removeAllListeners(types_1.EVENTS.RESPONSE);
