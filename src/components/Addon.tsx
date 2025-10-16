@@ -22,9 +22,9 @@ export const Addon = ({ active }: Props) => {
         () => ({
             req: entries.filter((entry) => [TYPES.REQ].includes(entry.type)).length,
             res: entries.filter((entry) => [TYPES.RES].includes(entry.type)).length,
-            err: entries.filter((entry) => [TYPES.RES_ERR].includes(entry.type)).length,
+            err: entries.filter((entry) => [TYPES.RES_ERR].includes(entry.type)).length
         }),
-        [entries],
+        [entries]
     );
 
     // biome-ignore lint/correctness/useExhaustiveDependencies : ignoring for now
@@ -48,41 +48,43 @@ export const Addon = ({ active }: Props) => {
 
     return (
         <AddonPanel active={active}>
-            {entries.length === 0 ? (
-                <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} />
-            ) : (
-                <Row gutter={16}>
-                    <Col span={4}>
-                        <Card>
-                            <Statistic
-                                title="Requests"
-                                value={stats.req}
-                                valueStyle={{ color: 'blue' }}
-                                prefix={<UploadOutlined />}
-                            />
-                        </Card>
-                        <Card>
-                            <Statistic
-                                title="Responses"
-                                value={stats.res}
-                                valueStyle={{ color: 'green' }}
-                                prefix={<DownloadOutlined />}
-                            />
-                        </Card>
-                        <Card>
-                            <Statistic
-                                title="Errors"
-                                value={stats.err}
-                                valueStyle={{ color: 'red' }}
-                                prefix={<DownloadOutlined />}
-                            />
-                        </Card>
-                    </Col>
-                    <Col span={20}>
-                        <List list={entries} />
-                    </Col>
-                </Row>
-            )}
+            <div style={{ padding: '16px', background: 'white' }}>
+                {entries.length === 0 ? (
+                    <Empty image={Empty.PRESENTED_IMAGE_SIMPLE}/>
+                ) : (
+                    <Row gutter={16}>
+                        <Col span={4}>
+                            <Card>
+                                <Statistic
+                                    title="Requests"
+                                    value={stats.req}
+                                    valueStyle={{ color: 'blue' }}
+                                    prefix={<UploadOutlined/>}
+                                />
+                            </Card>
+                            <Card>
+                                <Statistic
+                                    title="Responses"
+                                    value={stats.res}
+                                    valueStyle={{ color: 'green' }}
+                                    prefix={<DownloadOutlined/>}
+                                />
+                            </Card>
+                            <Card>
+                                <Statistic
+                                    title="Errors"
+                                    value={stats.err}
+                                    valueStyle={{ color: 'red' }}
+                                    prefix={<DownloadOutlined/>}
+                                />
+                            </Card>
+                        </Col>
+                        <Col span={20}>
+                            <List list={entries}/>
+                        </Col>
+                    </Row>
+                )}
+            </div>
         </AddonPanel>
     );
 };

@@ -40,7 +40,8 @@
     "javascript": {
         "jsxRuntime": "reactClassic",
         "formatter": {
-            "quoteStyle": "single"
+            "quoteStyle": "single",
+            "trailingCommas": "none"
         }
     },
     "assist": {
