@@ -1,4 +1,4 @@
-import { makeDecorator, useChannel } from '@storybook/addons';
+import { makeDecorator, useChannel } from 'storybook/preview-api';
 import type { AxiosInstance } from 'axios';
 import serializeFormData from './utils/serialize-form-data';
 

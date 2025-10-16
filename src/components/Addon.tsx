@@ -1,9 +1,9 @@
 import { DownloadOutlined, UploadOutlined } from '@ant-design/icons';
-import { addons } from '@storybook/addons';
 import { AddonPanel } from '@storybook/components';
-import { STORY_CHANGED } from '@storybook/core-events';
 import { Card, Col, Empty, Row, Statistic } from 'antd';
 import React, { useEffect, useMemo, useState } from 'react';
+import { STORY_CHANGED } from 'storybook/internal/core-events';
+import { addons } from 'storybook/manager-api';
 import { EVENTS, TYPES } from '../types';
 import { List } from './List';
 
