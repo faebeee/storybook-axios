@@ -1,6 +1,6 @@
 import React from 'react';
 import { addons, types } from '@storybook/addons';
-import { Addon } from './src/components/Addon';
+import { Addon } from './components/Addon';
 
 export enum IDS {
     ADDON = 'faebeee/storybook-axios',

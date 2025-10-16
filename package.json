@@ -2,6 +2,7 @@
     "name": "storybook-axios",
     "version": "2.0.0",
     "description": "Axios inspection for storybook",
+    "main": "./dist",
     "keywords": [
         "storybook",
         "axios",
@@ -10,12 +11,11 @@
         "addon",
         "storybook-addons"
     ],
-    "main": "./src/decorator.js",
     "scripts": {
         "lint": "biome lint",
         "format": "biome format",
         "dev": "npx tsc --watch",
-        "build": "npx tsc && npm run build-storybook",
+        "build": "npx tsc",
         "storybook": "start-storybook -p 6006",
         "typecheck": "tsc --noEmit",
         "build-storybook": "build-storybook -o docs"
@@ -29,14 +29,16 @@
     "engines": {
         "node": "16"
     },
+    "peerDependencies": {
+        "axios": "^1.12.2",
+        "react": "^17.0.1",
+        "react-dom": "^17.0.1"
+    },
     "dependencies": {
         "@ant-design/icons": "^5.0.0",
         "@storybook/addons": "^6.5.16",
         "@storybook/components": "^6.5.16",
-        "antd": "^5.10.3",
-        "axios": "^0.21.1",
-        "react": "^17.0.1",
-        "react-dom": "^17.0.1"
+        "antd": "^5.10.3"
     },
     "devDependencies": {
         "@babel/core": "^7.12.10",
