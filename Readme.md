@@ -23,16 +23,10 @@ Add addon  "storybook-axios" in `.storybook/main.js`
 
 ```js
 module.exports = {
-    stories: [
-        '../srcv2/**/*.stories.mdx',
-        '../srcv2/**/*.stories.@(js|jsx|ts|tsx)',
-    ],
+    ...
     addons: [
-        '@storybook/addon-essentials',
-        '@storybook/addon-notes/register',
-        '@storybook/addon-a11y',
-        '@whitespace/storybook-addon-html',
-        'storybook-axios/register'
+        ...
+        'storybook-axios/manager'
     ],
 ```
 
@@ -54,9 +48,26 @@ __Note__ best way is to have an axios helper library, which creates a single ins
 The decorator adds interceptors to that axios instance in order to listen for network requests.
 
 
+## Mock
+To mock several request, you can configure a mock function. This is best done on a per-story base
+
+```tsx
+// Button.stories.tsx
+export default {
+  title: 'Button',
+  component: Buttoon, 
+  tags: ['autodocs'],
+  decorators: [withStorybookAxios(getAxios(), {
+    mock: mock => {
+      mock.onGet('/my-api-request').reply(404);
+    }
+  })]
+} as Meta<typeof TextSurveyContentPdfView>;
+
+```
+
+for more detailed configuration of the mock [checkout these docs](https://www.npmjs.com/package/axios-mock-adapter)
+
 ## Example
 ![UI ](./doc/ui.gif)
 
-## Todos
-
-[x] Make it work with FormData

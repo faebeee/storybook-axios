@@ -4,5 +4,9 @@ import type { AxiosError } from 'axios';
 export type Props = { data: AxiosError };
 
 export const ResponseErrorEntry = ({ data }: Props) => {
-    return <pre className="pre">{data.message}</pre>;
+    console.log(data);
+    return <div>
+        <pre className="pre">{data.message}</pre>
+        <pre className="pre">{data.stack}</pre>
+    </div>;
 };

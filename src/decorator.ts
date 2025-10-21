@@ -1,8 +1,23 @@
 import type { AxiosInstance } from 'axios';
+import AxiosMockAdapter from 'axios-mock-adapter';
 import { makeDecorator, useChannel } from 'storybook/preview-api';
 import serializeFormData from './utils/serialize-form-data';
 
-export const withStorybookAxios = (axios: AxiosInstance) => {
+export type StorybookAxiosOpts = {
+    mock?: (adapter: AxiosMockAdapter) => void
+}
+
+/**
+ * Enhances a Storybook story by adding Axios interceptors for request and response monitoring
+ * and optionally sets up mock behavior using Axios Mock Adapter.
+ *
+ * @param {AxiosInstance} axios - The Axios instance to which interceptors will be attached.
+ * @param {StorybookAxiosOpts} [opts] - Optional configuration for the Storybook Axios integration.
+ *   - `mock`: A function that accepts an Axios Mock Adapter instance for customizing mock behavior.
+ *
+ * @returns {Function} A Storybook decorator that wraps stories with Axios monitoring and optional mocking capabilities.
+ */
+export const withStorybookAxios = (axios: AxiosInstance, opts?: StorybookAxiosOpts) => {
     const interceptors = { req: null, res: null };
 
     return makeDecorator({
@@ -45,9 +60,12 @@ export const withStorybookAxios = (axios: AxiosInstance) => {
             interceptors.req = axios.interceptors.request.use(onReq);
             interceptors.res = axios.interceptors.response.use(onRes, onResFailed);
 
+            if (opts?.mock) {
+                const mock = new AxiosMockAdapter(axios);
+                opts.mock(mock);
+            }
+
             return storyFn(context);
         }
     });
 };
-
-export default withStorybookAxios;

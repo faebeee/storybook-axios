@@ -31,7 +31,7 @@ export const List = ({ list }: ListProps) => {
             case TYPES.RES_ERR:
                 return {
                     key,
-                    label: `ERR ${entry.data.config?.url}`,
+                    label: `${entry.data.status} ${entry.data.config?.url}`,
                     children: <ResponseErrorEntry data={entry.data} />,
                     extra: <DownloadOutlined style={{ color: 'red' }} />,
                 };

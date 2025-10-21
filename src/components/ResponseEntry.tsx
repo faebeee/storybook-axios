@@ -6,9 +6,11 @@ import Title from 'antd/lib/typography/Title';
 export type Props = { data: AxiosResponse };
 
 export const ResponseEntry = ({ data }: Props) => {
+    console.log(data);
     return (
         <>
             <Title level={2}>Response</Title>
+            <pre className="pre">{data.config.url}</pre>
 
             <Divider orientation="left" plain>
                 Headers
