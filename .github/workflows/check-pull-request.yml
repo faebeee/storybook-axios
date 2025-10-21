@@ -22,9 +22,6 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Run formatter
-        run: npm run format
-
       - name: Run typecheck
         run: npm run typecheck
 
