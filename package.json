@@ -1,6 +1,6 @@
 {
   "name": "storybook-axios",
-  "version": "2.0.1-1",
+  "version": "2.0.1-2",
   "description": "Axios inspection for storybook",
   "keywords": [
     "storybook",
@@ -41,7 +41,7 @@
     "@ant-design/icons": "^5.0.0",
     "@storybook/components": "^9.0.0-alpha.1",
     "antd": "^5.10.3",
-      "axios-mock-adapter": "^2.1.0"
+    "axios-mock-adapter": "^2.1.0"
   },
   "devDependencies": {
     "@babel/core": "^7.12.10",
