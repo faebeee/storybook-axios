@@ -11,7 +11,7 @@ addons.register(IDS.ADDON, () => {
   addons.add(IDS.PANEL, {
     title: 'Axios',
     type: types.PANEL,
-    render: ({ active, key }: {active: boolean, key: string}) => {
+    render: ({ active, key }: {active: boolean; key: string}) => {
       return <Addon active={active} key={key}/>;
     }
   });
