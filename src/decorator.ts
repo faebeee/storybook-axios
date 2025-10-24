@@ -18,7 +18,7 @@ export type StorybookAxiosOpts = {
  * @returns {Function} A Storybook decorator that wraps stories with Axios monitoring and optional mocking capabilities.
  */
 export const withStorybookAxios = (axios: AxiosInstance, opts?: StorybookAxiosOpts) => {
-  const interceptors = { req: null, res: null };
+  const interceptors:{ req: number | null; res: number | null } = { req: null, res: null };
 
   return makeDecorator({
     name: 'withAxios',
