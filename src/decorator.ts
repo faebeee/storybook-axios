@@ -5,6 +5,7 @@ import serializeFormData from './utils/serialize-form-data';
 
 export type StorybookAxiosOpts = {
   mock?: (adapter: AxiosMockAdapter) => void;
+  catchAll?: boolean;
 };
 
 /**
@@ -61,6 +62,10 @@ export const withStorybookAxios = (axios: AxiosInstance, opts?: StorybookAxiosOp
       if (opts?.mock) {
         const mock = new AxiosMockAdapter(axios);
         opts.mock(mock);
+
+        if(opts?.catchAll){
+          mock.onAny().reply(501);
+        }
       }
 
       return storyFn(context);
