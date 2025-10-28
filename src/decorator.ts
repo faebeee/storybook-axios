@@ -19,7 +19,7 @@ export type StorybookAxiosOpts = {
  * @returns {Function} A Storybook decorator that wraps stories with Axios monitoring and optional mocking capabilities.
  */
 export const withStorybookAxios = (axios: AxiosInstance, opts?: StorybookAxiosOpts) => {
-  const interceptors:{ req: number | null; res: number | null } = { req: null, res: null };
+  const interceptors: {req: number | null; res: number | null} = { req: null, res: null };
 
   return makeDecorator({
     name: 'withAxios',
@@ -39,12 +39,13 @@ export const withStorybookAxios = (axios: AxiosInstance, opts?: StorybookAxiosOp
 
       const onReq = request => {
         const data =
-          request.data instanceof FormData? serializeFormData(request.data): request.data;
+          request.data instanceof FormData ? serializeFormData(request.data) : request.data;
         emit('axios-request', { ...request, data });
         return request;
       };
 
       const onRes = response => {
+        console.log('Got response:', response);
         emit('axios-response', response);
         return response;
       };
@@ -63,7 +64,7 @@ export const withStorybookAxios = (axios: AxiosInstance, opts?: StorybookAxiosOp
         const mock = new AxiosMockAdapter(axios);
         opts.mock(mock);
 
-        if(opts?.catchAll){
+        if (opts?.catchAll) {
           mock.onAny().reply(501);
         }
       }

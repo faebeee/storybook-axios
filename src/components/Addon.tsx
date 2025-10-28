@@ -12,20 +12,18 @@ export type Props = {
 
 export const Addon = ({ active }: Props) => {
   const [entries, setEntries] = useState([]);
-  const onRequest = data => setEntries([...entries, { type: TYPES.REQ, data }]);
-  const onResponse = data => setEntries([...entries, { type: TYPES.RES, data }]);
-  const onResponseError = data => setEntries([...entries, { type: TYPES.RES_ERR, data }]);
+  const onRequest = data => setEntries(entries => [...entries, { type: TYPES.REQ, data }]);
+  const onResponse = data => setEntries(entries => [...entries, { type: TYPES.RES, data }]);
+  const onResponseError = data => setEntries(entries => [...entries, { type: TYPES.RES_ERR, data }]);
   const onStoryChanged = () => setEntries([]);
 
   // biome-ignore lint/correctness/useExhaustiveDependencies : ignoring for now
   useEffect(() => {
     addons.getChannel().addListener(STORY_CHANGED, onStoryChanged);
 
-    if (active) {
-      addons.getChannel().addListener(EVENTS.REQUEST, onRequest);
-      addons.getChannel().addListener(EVENTS.RESPONSE, onResponse);
-      addons.getChannel().addListener(EVENTS.RESPONSE_ERROR, onResponseError);
-    }
+    addons.getChannel().addListener(EVENTS.REQUEST, onRequest);
+    addons.getChannel().addListener(EVENTS.RESPONSE, onResponse);
+    addons.getChannel().addListener(EVENTS.RESPONSE_ERROR, onResponseError);
 
     return () => {
       addons.getChannel().removeListener(STORY_CHANGED, onStoryChanged);
