@@ -45,7 +45,6 @@ export const withStorybookAxios = (axios: AxiosInstance, opts?: StorybookAxiosOp
       };
 
       const onRes = response => {
-        console.log('Got response:', response);
         emit('axios-response', response);
         return response;
       };
