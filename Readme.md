@@ -19,7 +19,7 @@ Created using [React](https://www.npmjs.com/package/react), [axios](https://www.
 
 ## Configure
 
-Add addon  "storybook-axios" in `.storybook/main.js`
+Add addon  "storybook-axios" in `.storybook/main.ts`
 
 ```js
 module.exports = {
@@ -30,7 +30,7 @@ module.exports = {
     ],
 ```
 
-add a decorator in `.storybook/preview.js` and pass in the `axios` instance which is used in your app.
+add a decorator in `.storybook/preview.ts` and pass in the `axios` instance which is used in your app.
 
 ```js
 import withAxiosDecorator from 'storybook-axios';

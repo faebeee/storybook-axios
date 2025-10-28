@@ -1,7 +1,6 @@
-import { DownloadOutlined, UploadOutlined } from '@ant-design/icons';
-import { AddonPanel } from '@storybook/components';
-import { Card, Col, Empty, Row, Statistic } from 'antd';
-import React, { useEffect, useMemo, useState } from 'react';
+import { Empty } from 'antd';
+import React, { useEffect, useState } from 'react';
+import { AddonPanel } from 'storybook/internal/components';
 import { STORY_CHANGED } from 'storybook/internal/core-events';
 import { addons } from 'storybook/manager-api';
 import { EVENTS, TYPES } from '../types';
@@ -17,15 +16,6 @@ export const Addon = ({ active }: Props) => {
   const onResponse = data => setEntries([...entries, { type: TYPES.RES, data }]);
   const onResponseError = data => setEntries([...entries, { type: TYPES.RES_ERR, data }]);
   const onStoryChanged = () => setEntries([]);
-
-  const stats = useMemo(
-    () => ({
-      req: entries.filter(entry => [TYPES.REQ].includes(entry.type)).length,
-      res: entries.filter(entry => [TYPES.RES].includes(entry.type)).length,
-      err: entries.filter(entry => [TYPES.RES_ERR].includes(entry.type)).length
-    }),
-    [entries]
-  );
 
   // biome-ignore lint/correctness/useExhaustiveDependencies : ignoring for now
   useEffect(() => {
@@ -52,37 +42,7 @@ export const Addon = ({ active }: Props) => {
         {entries.length === 0 ? (
           <Empty image={Empty.PRESENTED_IMAGE_SIMPLE}/>
         ) : (
-          <Row gutter={16}>
-            <Col span={4}>
-              <Card>
-                <Statistic
-                  title="Requests"
-                  value={stats.req}
-                  valueStyle={{ color: 'blue' }}
-                  prefix={<UploadOutlined/>}
-                />
-              </Card>
-              <Card>
-                <Statistic
-                  title="Responses"
-                  value={stats.res}
-                  valueStyle={{ color: 'green' }}
-                  prefix={<DownloadOutlined/>}
-                />
-              </Card>
-              <Card>
-                <Statistic
-                  title="Errors"
-                  value={stats.err}
-                  valueStyle={{ color: 'red' }}
-                  prefix={<DownloadOutlined/>}
-                />
-              </Card>
-            </Col>
-            <Col span={20}>
-              <List list={entries}/>
-            </Col>
-          </Row>
+          <List list={entries}/>
         )}
       </div>
     </AddonPanel>
