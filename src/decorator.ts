@@ -8,6 +8,8 @@ export type StorybookAxiosOpts = {
   catchAll?: boolean;
 };
 
+const interceptors: {req: number | null; res: number | null} = { req: null, res: null };
+
 /**
  * Enhances a Storybook story by adding Axios interceptors for request and response monitoring
  * and optionally sets up mock behavior using Axios Mock Adapter.
@@ -19,7 +21,7 @@ export type StorybookAxiosOpts = {
  * @returns {Function} A Storybook decorator that wraps stories with Axios monitoring and optional mocking capabilities.
  */
 export const withStorybookAxios = (axios: AxiosInstance, opts?: StorybookAxiosOpts) => {
-  const interceptors: {req: number | null; res: number | null} = { req: null, res: null };
+
 
   return makeDecorator({
     name: 'withAxios',
@@ -56,8 +58,14 @@ export const withStorybookAxios = (axios: AxiosInstance, opts?: StorybookAxiosOp
         return Promise.reject(error);
       };
 
-      interceptors.req = axios.interceptors.request.use(onReq);
-      interceptors.res = axios.interceptors.response.use(onRes, onResFailed);
+      if (!interceptors.req) {
+        interceptors.req = axios.interceptors.request.use(onReq);
+
+      }
+
+      if (!interceptors.res) {
+        interceptors.res = axios.interceptors.response.use(onRes, onResFailed);
+      }
 
       if (opts?.mock) {
         const mock = new AxiosMockAdapter(axios);

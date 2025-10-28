@@ -15,7 +15,9 @@ export const Addon = ({ active }: Props) => {
   const onRequest = data => setEntries(entries => [...entries, { type: TYPES.REQ, data }]);
   const onResponse = data => setEntries(entries => [...entries, { type: TYPES.RES, data }]);
   const onResponseError = data => setEntries(entries => [...entries, { type: TYPES.RES_ERR, data }]);
-  const onStoryChanged = () => setEntries([]);
+  const onStoryChanged = () => {
+    setEntries([]);
+  };
 
   // biome-ignore lint/correctness/useExhaustiveDependencies : ignoring for now
   useEffect(() => {
@@ -27,9 +29,9 @@ export const Addon = ({ active }: Props) => {
 
     return () => {
       addons.getChannel().removeListener(STORY_CHANGED, onStoryChanged);
-      addons.getChannel().removeAllListeners(EVENTS.REQUEST);
-      addons.getChannel().removeAllListeners(EVENTS.RESPONSE);
-      addons.getChannel().removeAllListeners(EVENTS.RESPONSE_ERROR);
+      addons.getChannel().removeListener(EVENTS.REQUEST, onRequest);
+      addons.getChannel().removeListener(EVENTS.RESPONSE, onResponse);
+      addons.getChannel().removeListener(EVENTS.RESPONSE_ERROR, onResponseError);
     };
     // biome-ignore lint/correctness/useExhaustiveDependencies : ignoring for now
   }, [onRequest, onResponse, onResponseError]);

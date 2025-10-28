@@ -24,6 +24,7 @@ export const List = ({ list }: ListProps) => {
           key,
           status: null,
           url: entry.data.url,
+          type: entry.type,
           data: entry,
           label: `${entry.data.method?.toUpperCase()} ${entry.data.url}`,
           children: <RequestEntry data={entry.data}/>,
@@ -32,6 +33,7 @@ export const List = ({ list }: ListProps) => {
       case TYPES.RES:
         return {
           key,
+          type: entry.type,
           status: entry.data.status,
           url: entry.data.config.url,
           data: entry,
@@ -42,6 +44,7 @@ export const List = ({ list }: ListProps) => {
       case TYPES.RES_ERR:
         return {
           key,
+          type: entry.type,
           status: entry.data.status,
           url: entry.data.config.url,
           data: entry,
@@ -70,7 +73,8 @@ export const List = ({ list }: ListProps) => {
       >
         <AntList.Item.Meta
           avatar={<>{item.status ?<Tag color={item.status > 399 ? 'red' : 'green'}>{item.status}</Tag> : null}</>}
-          title={item.url}
+          title={<>{item.url}</>}
+          description={item.type === TYPES.REQ ? item.data.data.method : ''}
         />
 
       </AntList.Item>}
