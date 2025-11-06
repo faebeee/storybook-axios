@@ -7,12 +7,15 @@ const config: StorybookConfig = {
 
   'addons': [
     '@storybook/addon-links',
-    import.meta.resolve('./local-preset.ts')
-    // '../manager',
+    '../src/manager.ts'
   ],
   'framework': {
     'name': '@storybook/react-vite',
-    'options': {}
+    options: {
+      builder: {
+        viteConfigPath: 'vite.storybook.config.js'
+      }
+    }
   },
 };
 export default config;

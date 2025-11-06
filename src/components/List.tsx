@@ -1,17 +1,6 @@
-import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
-import {
-  Drawer,
-  DrawerClose,
-  DrawerContent,
-  DrawerDescription,
-  DrawerFooter,
-  DrawerHeader,
-  DrawerTitle
-} from '@/components/ui/drawer';
-import { Item, ItemActions, ItemContent, ItemMedia, ItemTitle } from '@/components/ui/item';
-import { ChevronRightIcon, DownloadIcon, UploadIcon } from 'lucide-react';
+import { DownloadIcon, UploadIcon } from 'lucide-react';
 import React, { useState } from 'react';
+import { Badge, Button, Modal, SyntaxHighlighter, Table } from 'storybook/internal/components';
 
 import { type ListEntry, TYPES } from '../types';
 
@@ -20,8 +9,6 @@ export type ListProps = {list: ListEntry[]};
 export const List = ({ list }: ListProps) => {
   const [open, setOpen] = useState(false);
   const [dataToShow, setDataToShow] = useState<ListEntry | null>(null);
-  const showDrawer = () => setOpen(true);
-  const onClose = () => setOpen(false);
 
   const items = list.map((entry, idx) => {
     const key = String(idx);
@@ -60,46 +47,37 @@ export const List = ({ list }: ListProps) => {
     }
   });
 
-  return <>
-    <ul>
-      {items.map(item => <Item key={item.key}>
-        <ItemMedia>
-          <>{item.status ? <Badge color={item.status > 399 ? 'red' : 'green'}>{item.status}</Badge> : null}</>
-        </ItemMedia>
+  return <div>
+    <h3>Request histoy</h3>
 
-        <ItemContent>
-          <ItemTitle>{item.url}</ItemTitle>
-        </ItemContent>
+    <Table className={'w-full'}>
+      {items.map(item => <tr key={item.key}>
+        <td>
+          <>{item.status ? <Badge status={item.status > 399 ? 'negative' : 'positive'}>{item.status}</Badge> : item.data.data.method?.toUpperCase()}</>
+        </td>
 
-        <ItemActions>
-          <Button onClick={() => {
+        <td>
+          {item.url}
+        </td>
+
+        <td>
+          {item.type !== TYPES.REQ && <Button onClick={() => {
             setDataToShow(item.data);
-            showDrawer();
+            setOpen(true);
           }}>
+            Inspect
+          </Button>}
+        </td>
+      </tr>)}
+    </Table>
 
-            <ChevronRightIcon className="size-4"/>
-          </Button>
-        </ItemActions>
-
-      </Item>)}
-
-    </ul>
-
-    <Drawer open={open} onClose={onClose}>
-      <DrawerContent>
-        <DrawerHeader>
-          <DrawerTitle>Inspect Data</DrawerTitle>
-          <DrawerDescription>This action cannot be undone.</DrawerDescription>
-        </DrawerHeader>
-        <div className="p-4 pb-0">
-          {dataToShow && <pre>{JSON.stringify(dataToShow.data, null, 2)}</pre>}
-        </div>
-        <DrawerFooter>
-          <DrawerClose>
-            <Button variant="outline">Cancel</Button>
-          </DrawerClose>
-        </DrawerFooter>
-      </DrawerContent>
-    </Drawer>
-  </>;
+    <Modal open={open} onOpenChange={v => setOpen(v)}>
+      <div style={{ padding: '16px' }}>
+        <h1>Intercepted response</h1>
+        {dataToShow && <SyntaxHighlighter language={'json'}>
+          {JSON.stringify(dataToShow.data.data, null, 2)}
+        </SyntaxHighlighter>}
+      </div>
+    </Modal>
+  </div>;
 };

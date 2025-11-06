@@ -1,26 +1,36 @@
 {
     "compilerOptions": {
-        "target": "ES2017",
-        "lib": ["dom", "dom.iterable", "esnext"],
+        "lib": [
+            "dom",
+            "dom.iterable",
+            "esnext"
+        ],
         "allowJs": true,
         "skipLibCheck": true,
-        "module": "preserve",
         "strict": true,
-        "noEmit": true,
         "esModuleInterop": true,
-        "outDir": "./dist",
-        "moduleResolution": "bundler",
         "baseUrl": "./",
         "rootDir": "./",
         "resolveJsonModule": true,
         "isolatedModules": true,
-        "jsx": "react",
         "incremental": true,
         "noImplicitAny": false,
-        "paths": {
-            "@/*": ["./src/*"]
-        }
+        "target": "ES2020",
+        "module": "ES2020",
+        "moduleResolution": "bundler",
+        "jsx": "react-jsx",
+        "outDir": "./dist",
+        "declaration": true,
+        "noEmit": true,
     },
-    "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
-    "exclude": ["node_modules"]
+    "include": [
+        "next-env.d.ts",
+        "**/*.ts",
+        "**/*.tsx",
+        ".next/types/**/*.ts"
+    ],
+    "exclude": [
+        "node_modules",
+        "./dist"
+    ]
 }

@@ -11,9 +11,16 @@ export enum EVENTS {
   RESPONSE = 'axios-response',
   RESPONSE_ERROR = 'axios-response-error',
   UPDATE_COUNT = 'axios-update-count',
+  MOCK_CONFIG = 'axios-mock-config',
 }
 
 export type ListEntry =
     | { type: TYPES.RES_ERR; data: AxiosError }
     | { type: TYPES.REQ; data: AxiosRequestConfig }
     | { type: TYPES.RES; data: AxiosResponse };
+
+
+export type AxiosMockHandlersConfig = {
+  method: string;
+  url: string;
+};

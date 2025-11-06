@@ -1,6 +1,6 @@
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
 import React, { FC, type FormEvent, useRef } from 'react';
+import { Button } from '../src/components/ui/button';
+import { Input } from '../src/components/ui/input';
 import serializeFormData from '../src/utils/serialize-form-data';
 import { getAxios } from '../utils/get-axios';
 
