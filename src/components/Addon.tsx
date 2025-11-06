@@ -1,17 +1,16 @@
-import { Empty } from 'antd';
-import React, { useEffect, useState } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 import { AddonPanel } from 'storybook/internal/components';
 import { STORY_CHANGED } from 'storybook/internal/core-events';
 import { addons } from 'storybook/manager-api';
-import { EVENTS, TYPES } from '../types';
+import { EVENTS, type ListEntry, TYPES } from '../types';
 import { List } from './List';
 
 export type Props = {
   active: boolean;
 };
 
-export const Addon = ({ active }: Props) => {
-  const [entries, setEntries] = useState([]);
+export const Addon:FC<Props> = ({ active }) => {
+  const [entries, setEntries] = useState<ListEntry[]>([]);
   const onRequest = data => setEntries(entries => [...entries, { type: TYPES.REQ, data }]);
   const onResponse = data => setEntries(entries => [...entries, { type: TYPES.RES, data }]);
   const onResponseError = data => setEntries(entries => [...entries, { type: TYPES.RES_ERR, data }]);
@@ -40,7 +39,7 @@ export const Addon = ({ active }: Props) => {
     <AddonPanel active={active}>
       <div style={{ padding: '16px', background: 'white' }}>
         {entries.length === 0 ? (
-          <Empty image={Empty.PRESENTED_IMAGE_SIMPLE}/>
+          <div>No requests made yet</div>
         ) : (
           <List list={entries}/>
         )}

@@ -3,3 +3,6 @@ node_modules
 .DS_Store
 .vscode/settings.json
 dist
+
+*storybook.log
+storybook-static

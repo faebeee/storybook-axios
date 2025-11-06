@@ -1,7 +1,7 @@
-import { Button } from 'antd';
 import type { AxiosRequestConfig } from 'axios';
 import React from 'react';
 import { getAxios } from '../utils/get-axios';
+import { Button } from '@/components/ui/button';
 
 export interface PageProps {
   url: string;
@@ -15,7 +15,7 @@ export const ComplexPage = ({ url }: PageProps) => {
   };
 
   return (
-    <Button type="primary" onClick={execRequest}>
+    <Button onClick={execRequest}>
       Load
     </Button>
   );

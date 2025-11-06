@@ -1,4 +1,3 @@
-import React from 'react';
 import { addons, types } from 'storybook/manager-api';
 import { Addon } from './components/Addon';
 
@@ -11,8 +10,8 @@ addons.register(IDS.ADDON, () => {
   addons.add(IDS.PANEL, {
     title: 'Axios',
     type: types.PANEL,
-    render: ({ active, key }: {active: boolean; key: string}) => {
-      return <Addon active={active} key={key}/>;
-    }
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
+    render: Addon
   });
 });
