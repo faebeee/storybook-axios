@@ -49,11 +49,15 @@ export const List = ({ list }: ListProps) => {
 
   return <div>
     <h3>Request histoy</h3>
-
     <Table className={'w-full'}>
       {items.map(item => <tr key={item.key}>
         <td>
-          <>{item.status ? <Badge status={item.status > 399 ? 'negative' : 'positive'}>{item.status}</Badge> : item.data.data.method?.toUpperCase()}</>
+          <>{item.status ? <Badge
+            status={item.status > 399 ? 'negative' : 'positive'}>{
+              item.status}
+            {/* eslint-disable-next-line @typescript-eslint/ban-ts-comment */}
+            {/* @ts-expect-error */}
+          </Badge>: item.data.data.method?.toUpperCase()}</>
         </td>
 
         <td>
@@ -75,6 +79,8 @@ export const List = ({ list }: ListProps) => {
       <div style={{ padding: '16px' }}>
         <h1>Intercepted response</h1>
         {dataToShow && <SyntaxHighlighter language={'json'}>
+          {/* eslint-disable-next-line @typescript-eslint/ban-ts-comment */}
+          {/* @ts-expect-error */}
           {JSON.stringify(dataToShow.data.data, null, 2)}
         </SyntaxHighlighter>}
       </div>
