@@ -7,10 +7,7 @@ on:
 jobs:
     build:
         runs-on: ubuntu-latest
-        permissions:
-            contents: read
-            pages: write
-            id-token: write
+
         steps:
             -   name: Checkout code
                 uses: actions/checkout@v4
@@ -36,6 +33,10 @@ jobs:
         environment:
             name: github-pages
             url: ${{ steps.deployment.outputs.page_url }}
+        permissions:
+            contents: read
+            pages: write
+            id-token: write
         runs-on: ubuntu-latest
         needs: build
         steps:
