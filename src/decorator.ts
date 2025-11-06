@@ -69,9 +69,10 @@ export const withStorybookAxios = (axios: AxiosInstance, opts?: StorybookAxiosOp
           options.mock(mock);
           // eslint-disable-next-line @typescript-eslint/ban-ts-comment
           // @ts-expect-error
-          const handlers: AxiosMockHandlersConfig[] = mock.handlers.map(handler => ({
+          const handlers: AxiosMockHandlersConfig[] = mock.handlers.map((handler, index) => ({
             method: handler.method,
-            url: handler.url
+            url: handler.url,
+            id: index
           }));
           emit(EVENTS.MOCK_CONFIG, handlers);
         }

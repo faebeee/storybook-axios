@@ -23,4 +23,5 @@ export type ListEntry =
 export type AxiosMockHandlersConfig = {
   method: string;
   url: string;
+  id: number;
 };

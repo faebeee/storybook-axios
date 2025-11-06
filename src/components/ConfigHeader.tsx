@@ -10,9 +10,9 @@ export const ConfigHeader: FC<ConfigHeaderProps> = ({ configs }) => {
   return <div>
     <h3>Mocked requests</h3>
     <Table>
-      {configs.map(config => <tr>
-        <td>{config.method.toUpperCase()}</td>
-        <td>{config.url}</td>
+      {configs.map(config => <tr key={config.id}>
+        <td>{config.method?.toUpperCase()}</td>
+        <td>{config.url.toString()}</td>
       </tr>)}
     </Table>
   </div>;
